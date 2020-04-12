@@ -1,0 +1,2 @@
+class DCParseError(Exception):
+    pass
