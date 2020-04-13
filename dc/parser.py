@@ -538,7 +538,7 @@ def parse_dc_files(fps, debug=False) -> DCFile:
     return transformer.dcfile
 
 
-def parse_dc(data: bytes, debug=False) -> DCFile:
+def parse_dc(data: str, debug=False) -> DCFile:
     with open(DC_LARK, 'r') as lark_f:
         transformer = DCFileTransformer()
         dc_parser = Lark(lark_f, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
