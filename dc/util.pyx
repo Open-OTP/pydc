@@ -7,10 +7,12 @@ import numpy as np
 cdef class Datagram:
     cdef unsigned char* buffer
     cdef unsigned int length
+    cdef unsigned int offset
     cdef unsigned int buffer_size
 
     def __cinit__(self):
         self.length = 0
+        self.offset = 0
         self.buffer_size = 64
         self.buffer = <unsigned char *>malloc(self.buffer_size)
 
@@ -24,11 +26,13 @@ cdef class Datagram:
         self.buffer = <unsigned char *>realloc(self.buffer, self.buffer_size)
 
     cdef inline void append_data(self, const void* value, const unsigned int value_size):
-        self.check_resize(self.length + value_size)
+        cdef unsigned int new_size = max(self.offset + value_size, self.length)
+        self.check_resize(new_size)
         if self.buffer is NULL:
             return
-        memcpy(&self.buffer[self.length], value, value_size)
-        self.length += value_size
+        memcpy(&self.buffer[self.offset], value, value_size)
+        self.length = new_size
+        self.offset += value_size
 
     def add_int8(self, const char value):
         self.append_data(&value, sizeof(value))
@@ -60,12 +64,12 @@ cdef class Datagram:
         if self.buffer is NULL:
             raise MemoryError('could not allocate memory for datagram')
 
-    def add_int64(self, const long value):
+    def add_int64(self, const long long value):
         self.append_data(&value, sizeof(value))
         if self.buffer is NULL:
             raise MemoryError('could not allocate memory for datagram')
 
-    def add_uint64(self, const unsigned long value):
+    def add_uint64(self, const unsigned long long value):
         self.append_data(&value, sizeof(value))
         if self.buffer is NULL:
             raise MemoryError('could not allocate memory for datagram')
@@ -80,7 +84,7 @@ cdef class Datagram:
             raise MemoryError('could not allocate memory for datagram')
 
     def add_string16(self, const unsigned char[:] data):
-        cdef short string_length = data.size
+        cdef unsigned short string_length = data.size
         self.append_data(&string_length, sizeof(string_length))
         if string_length:
             self.append_data(&data[0], string_length)
@@ -88,7 +92,7 @@ cdef class Datagram:
             raise MemoryError('could not allocate memory for datagram')
 
     def add_string32(self, const unsigned char[:] data):
-        cdef int string_length = data.size
+        cdef unsigned int string_length = data.size
         self.append_data(&string_length, sizeof(string_length))
         if string_length:
             self.append_data(&data[0], string_length)
@@ -124,7 +128,9 @@ cdef class Datagram:
     def iterator(self):
         if self.buffer is NULL:
             raise MemoryError('tried to make iterator of invalid datagram')
-        return DatagramIterator(self)
+        cdef DatagramIterator dgi = DatagramIterator()
+        dgi.set_dg(<void *>self)
+        return dgi
 
     def copy(self):
         if self.buffer is NULL:
@@ -135,14 +141,23 @@ cdef class Datagram:
         copy_dg.length = self.length
         return copy_dg
 
+    def seek(self, unsigned int n):
+        if n < 0 or n > self.length:
+            raise OverflowError('invalid pos in Datagram')
+        self.offset = n
+
+    def tell(self):
+        return self.offset
 
 cdef class DatagramIterator:
     cdef Datagram dg
     cdef unsigned int offset
 
-    def __cinit__(self, Datagram dg):
-        self.dg = dg
+    def __cinit__(self):
         self.offset = 0
+
+    cdef set_dg(self, void* ptr):
+        self.dg = <Datagram> ptr
 
     cdef inline void get_data(self, void* value, const unsigned short num_bytes):
         cdef const unsigned char* buffer = self.dg.buffer
@@ -193,14 +208,14 @@ cdef class DatagramIterator:
         return value
 
     def get_int64(self):
-        if self.offset + sizeof(long) > self.dg.length:
+        if self.offset + sizeof(long long) > self.dg.length:
             raise OverflowError('tried reading past datagram')
         cdef long value
         self.get_data(&value, sizeof(value))
         return value
 
     def get_uint64(self):
-        if self.offset + sizeof(unsigned long) > self.dg.length:
+        if self.offset + sizeof(unsigned long long) > self.dg.length:
             raise OverflowError('tried reading past datagram')
         cdef unsigned long value
         self.get_data(&value, sizeof(value))
@@ -243,7 +258,7 @@ cdef class DatagramIterator:
     def get_string32(self):
         cdef unsigned int num_bytes = self.get_uint32()
         if self.offset + num_bytes > self.dg.length:
-            raise OverflowError('tried reading past datagram')
+            raise OverflowError('tried reading past datagram: string length is %d' % num_bytes)
 
         cdef bytearray value = bytearray(num_bytes)
         self.get_data(<unsigned char *>value, num_bytes)
