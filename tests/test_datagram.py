@@ -128,6 +128,26 @@ class TestDatagram(unittest.TestCase):
         del dg
         self.assertEqual(dg2.get_message().tobytes(), data)
 
+    def test_overwrite(self):
+        dg = Datagram()
+        dg.add_uint32(2828)
+
+        pos = dg.tell()
+        self.assertEqual(pos, 4)
+
+        dg.add_uint16(24)
+        dg.add_int64(-352793)
+        dg.seek(pos)
+        dg.add_uint16(5000)
+        dg.seek(dg.get_length())
+        dg.add_string32(b'overwrite')
+
+        dgi = dg.iterator()
+        self.assertEqual(dgi.get_uint32(), 2828)
+        self.assertEqual(dgi.get_uint16(), 5000)
+        self.assertEqual(dgi.get_int64(), -352793)
+        self.assertEqual(dgi.get_string32(), 'overwrite')
+
 
 if __name__ == '__main__':
     unittest.main()
