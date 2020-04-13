@@ -57,6 +57,14 @@ pack_functions = {
     DCTypes.blob: Datagram.add_bytes,
     DCTypes.blob32: Datagram.add_string32,
     DCTypes.char: Datagram.add_uint8,
+
+    # For individual array elements.
+    DCTypes.int8array: Datagram.add_int8,
+    DCTypes.uint8array: Datagram.add_uint8,
+    DCTypes.int16array: Datagram.add_int16,
+    DCTypes.uint16array: Datagram.add_uint16,
+    DCTypes.int32array: Datagram.add_int32,
+    DCTypes.uint32array: Datagram.add_uint32,
 }
 
 
@@ -128,10 +136,10 @@ class FRange:
 class DCPackable(object):
     __slots__ = '__weakref__'
 
-    def pack_default(self):
+    def pack_default(self, dg):
         raise NotImplementedError
 
-    def pack_value(self, val):
+    def pack_value(self, dg, value):
         raise NotImplementedError
 
     def unpack_value(self, dgi):
@@ -152,10 +160,10 @@ class Parameter(DCPackable):
         self.identifier = identifier
         self.default = default
 
-    def pack_default(self):
+    def pack_default(self, dg):
         if self.default is None:
-            return b''
-        return self.pack_value(self.default)
+            raise DCParseError('tried packing default for parameter without default')
+        return self.pack_value(dg, self.default)
 
     def generate_hash(self, hash_gen):
         raise NotImplementedError
@@ -206,7 +214,7 @@ class SimpleParameter(Parameter):
     def validate_value(self, value):
         return True
 
-    def pack_value(self, value):
+    def pack_value(self, dg, value):
         if not self.validate_value(value):
             raise DCParseError
         # TODO: remove this hacky sack
@@ -216,7 +224,8 @@ class SimpleParameter(Parameter):
         # TODO: remove this hacky sack
         if type(value) == str:
             value = value.encode()
-        return pack_functions[DCTypes[self.dtype]](value)
+
+        pack_functions[DCTypes[self.dtype]](dg, value)
 
     def unpack_value(self, dgi):
         return unpack_functions[DCTypes[self.dtype]](dgi)
@@ -294,33 +303,64 @@ class ArrayParameter(SimpleParameter):
                         hash_gen.add_int(r.min_n)
                         hash_gen.add_int(r.max_n)
 
-    def pack_value(self, it, dimension=None):
+    def pack_value(self, dg, it, dimension=None):
         primary_type = type(self.dtype) == str
         string_type = self.dtype in {'string', 'blob', 'blob32'}
-        length_type = '<H' if self.dtype != 'blob32' else '<I'
+        length_header_size = 2 if self.dtype != 'blob32' else 4
+        legacy_array_type = primary_type and 'array' in self.dtype
 
         if dimension is None and self.arange:
             dimension = len(self.arange) - 1
         else:
             dimension = 0
 
+        need_length_header = not self.fixed_array_size or not self.fixed_array_size[dimension]
+
+        header_pos = dg.tell()
+
+        if need_length_header:
+            # Write length header now. Seek and overwrite it later.
+            if length_header_size == 2:
+                dg.add_uint16(0)
+            else:
+                dg.add_uint32(0)
+
+        pre_pos = dg.tell()
+
         if dimension:
             # Pack dimension
-            data = b''.join((self.pack_value(i, dimension=dimension - 1) for i in it))
+            for i in it:
+                self.pack_value(dg, i, dimension=dimension - 1)
         elif string_type:
             # TODO: fix this call
-            data = b''.join((SizedParameter.pack_value(self, i) for i in it))
+            for i in it:
+                SizedParameter.pack_value(self, dg, i)
+        elif legacy_array_type:
+            if self.dtype == 'uint32uint8array':
+                for a, b in it:
+                    pack_functions[DCTypes.uint32](dg, a)
+                    pack_functions[DCTypes.uint8](dg, b)
+            else:
+                element_type = self.dtype.replace('array', '')
+                for i in it:
+                    pack_functions[DCTypes[element_type]](dg, i)
         elif primary_type:
-            data = b''.join((SimpleParameter.pack_value(self, i) for i in it))
+            for i in it:
+                SimpleParameter.pack_value(self, dg, i)
         else:
-            data = b''.join((self.dtype.pack_value(i) for i in it))
+            for i in it:
+                self.dtype.pack_value(dg, i)
 
-        if not self.fixed_array_size or not self.fixed_array_size[dimension]:
-            length = struct.pack(length_type, len(data))
-        else:
-            length = b''
-
-        return b''.join((length, data))
+        if need_length_header:
+            data_size = dg.tell() - pre_pos
+            if data_size and need_length_header:
+                post_pos = dg.tell()
+                dg.seek(header_pos)
+                if length_header_size == 2:
+                    dg.add_uint16(data_size)
+                else:
+                    dg.add_uint32(data_size)
+                dg.seek(post_pos)
 
     def unpack_value(self, dgi):
         if self.arange is None:
@@ -332,6 +372,7 @@ class ArrayParameter(SimpleParameter):
         primary_type = type(self.dtype) == str
         string_type = self.dtype in {'string', 'blob', 'blob32'}
         is_blob32 = self.dtype == 'blob32'
+        legacy_array_type = self.dtype.endswith('array')
 
         elements = []
 
@@ -358,6 +399,14 @@ class ArrayParameter(SimpleParameter):
                     else:
                         length -= (2 if not is_blob32 else 4)
                         length -= len(element)
+                elif legacy_array_type:
+                    if self.dtype == 'uint32uint8array':
+                        element = [unpack_functions[DCTypes.uint32](dgi), unpack_functions[DCTypes.uint8](dgi)]
+                        length -= 5
+                    else:
+                        element_type = self.dtype.replace('array', '')
+                        element = unpack_functions[DCTypes[element_type]](dgi)
+                        length -= fixed_byte_sizes[DCTypes[element_type]]
                 elif primary_type:
                     element = SimpleParameter.unpack_value(self, dgi)
                     length -= self.fixed_byte_size
@@ -388,17 +437,16 @@ class ArrayParameter(SimpleParameter):
 
 
 class SizedParameter(SimpleParameter):
-    def pack_value(self, value):
-        if not self.fixed_byte_size:
-            length = struct.pack('<H' if self.dtype != 'blob32' else '<I', len(value))
-        else:
-            length = b''
+    def pack_value(self, dg, value):
+        if type(value) == str:
+            value = value.encode('utf-8')
 
-        if type(value) == bytes:
-            return b''.join((length, value))
-        else:
-            payload = struct.pack('<%dc' % len(value), *(c.encode() for c in value))
-        return b''.join((length, payload))
+        if not self.fixed_byte_size:
+          if self.dtype != 'blob32':
+              dg.add_string16(value)
+          else:
+              dg.add_string32(value)
+
 
     def unpack_value(self, dgi):
         if not self.fixed_byte_size:
@@ -448,12 +496,12 @@ class StructParameter(SimpleParameter):
         except KeyError:
             self.dtype.generate_hash(hash_gen)
 
-    def pack_value(self, value):
+    def pack_value(self, dg, value):
         # TODO: fix aliases(typedef) for base types being structs.
         if type(self.dtype) == str:
-            return SimpleParameter.pack_value(self, value)
+            return SimpleParameter.pack_value(self, dg, value)
 
-        return self.dtype.pack_fields_from_obj(value)
+        self.dtype.pack_fields_from_obj(dg, value)
 
     def unpack_value(self, dgi):
         # TODO: fix aliases(typedef) for base types being structs.
@@ -504,18 +552,17 @@ class DSwitch(Parameter):
             for parameter in self.default_case.parameters:
                 parameter.generate_hash(hash_gen)
 
-    def pack_value(self, it):
+    def pack_value(self, dg, it):
         switched_val = it.pop(0)
         first = self.dtype.pack_value(switched_val)
         for case in self.cases:
             if case.value == switched_val:
-
-                rest = b''.join((parameter.pack_value(item) for item, parameter in zip(it, case.parameters)))
-                break
+                for item, parameter in zip(it, case.parameters):
+                    parameter.pack_value(dg, item)
+                    break
         else:
-            rest = b''.join((parameter.pack_value(item) for item, parameter in zip(it, self.default_case.parameters)))
-
-        return b''.join((first, rest))
+           for item, parameter in zip(it, self.default_case.parameters):
+               parameter.pack_value(dg, item)
 
     def unpack_value(self, dgi):
         first = self.dtype.unpack_value(dgi)
@@ -647,7 +694,7 @@ class DCField(DCPackable):
         dg.add_uint16(STATESERVER_OBJECT_UPDATE_FIELD)
         dg.add_uint32(do_id)
         dg.add_uint16(self.number)
-        dg.append_data(self.pack_value(args))
+        self.pack_value(dg, args)
         return dg
 
     def ai_format_update_msg_type(self, do_id, to_id, from_id, msg_type, args):
@@ -671,8 +718,8 @@ class ParameterField(DCField):
 
         self.parameter.generate_hash(hash_gen)
 
-    def pack_value(self, arg):
-        return self.parameter.pack_value(arg)
+    def pack_value(self, dg, arg):
+        self.parameter.pack_value(dg, arg)
 
     def unpack_value(self, dgi):
         return self.parameter.unpack_value(dgi)
@@ -704,8 +751,12 @@ class AtomicField(DCField):
         if self.flags != ~0:
             hash_gen.add_int(self.flags)
 
-    def pack_value(self, args):
-        return b''.join((parameter.pack_value(arg) for parameter, arg in zip(self.parameters, args)))
+    def pack_value(self, dg, args):
+        if len(args) != len(self.parameters):
+            raise DCParseError('Expected %s for packing, received %s.' % (len(self.parameters), len(args)))
+
+        for parameter, arg in zip(self.parameters, args):
+            parameter.pack_value(dg, arg)
 
     def unpack_value(self, dgi):
         return tuple(parameter.unpack_value(dgi) for parameter in self.parameters)
@@ -722,7 +773,7 @@ class MolecularField(DCField):
 
     def __init__(self, name, subfields, keywords=()):
         DCField.__init__(self, name, keywords)
-        self.subfields = subfields
+        self.subfields = subfields # type: List[DCField]
 
     def generate_hash(self, hash_gen):
         DCField.generate_hash(self, hash_gen)
@@ -731,18 +782,14 @@ class MolecularField(DCField):
         for subfield in self.subfields:
             subfield.generate_hash(hash_gen)
 
-    def pack_value(self, args):
+    def pack_value(self, dg, args):
         n = self.num_args()
         assert len(args) == n
 
-        data = b''
-
         for subfield in self.subfields:
             n = subfield.num_args()
-            data = b''.join((data, subfield.pack_value(args[:n])))
+            subfield.pack_value(dg, args[:n])
             args = args[n:]
-
-        return data
 
     def num_args(self):
         return sum((subfield.num_args() for subfield in self.subfields))
@@ -856,8 +903,9 @@ class DClass:
             return 'dclass {}'.format(self.name)
         return 'struct {}'.format(self.name)
 
-    def pack_fields_from_obj(self, obj):
-        return b''.join((self.pack_field(obj, field) for field in self.fields))
+    def pack_fields_from_obj(self, dg, obj):
+        for field in self.fields:
+            self.pack_field(dg, obj, field)
 
     def receive_update(self, obj, dgi):
         field_index = dgi.get_uint16()
@@ -889,7 +937,7 @@ class DClass:
         self.fields_by_name[field_name].receive_update(obj, blob)
 
     def pack_required_field(self, dg, obj, field):
-        dg.append_data(self.pack_field(obj, field))
+        self.pack_field(dg, obj, field)
 
     def ai_format_update(self, field_name, do_id, to_id, from_id, args):
         return self.fields_by_name[field_name].ai_format_update(do_id, to_id, from_id, args)
@@ -916,7 +964,7 @@ class DClass:
 
         for field in self.inherited_fields:
             if not isinstance(field, MolecularField) and field.is_required:
-                dg.append_data(self.pack_field(obj, field))
+                self.pack_field(dg, obj, field)
 
         if optional_fields:
             dg.add_uint16(len(optional_fields))
@@ -924,30 +972,33 @@ class DClass:
             for field_name in optional_fields:
                 field = self.fields_by_name[field_name]
                 dg.add_uint16(field.number)
-                dg.append_data(self.pack_field(obj, field))
+                self.pack_field(dg, obj, field)
 
         return dg
 
-    def pack_field(self, obj, field):
+    def pack_field(self, dg, obj, field):
         if isinstance(field, ParameterField):
             try:
                 if field.name:
                     val = getattr(obj, field.name)
-                    return field.pack_value(val)
+                    field.pack_value(dg, val)
+                    return
                 elif isinstance(obj, collections.abc.Sequence):
                     val = obj[self.fields.index(field)]
-                    return field.pack_value(val)
+                    field.pack_value(dg, val)
+                    return
                 else:
                     raise AttributeError
             except AttributeError:
                 assert field.parameter.default is not None
-                return field.pack_default()
+                field.pack_default(dg)
+                return
         elif isinstance(field, MolecularField):
             raise Exception
         else:
 
             if not len(field.parameters):
-                return b''
+                return
 
             getter = field.name
 
@@ -962,16 +1013,18 @@ class DClass:
                         val = (val, )
                     else:
                         assert isinstance(val, collections.abc.Sequence)
-                    return field.pack_value(val)
+                    field.pack_value(dg, val)
+                    return
 
                 elif isinstance(obj, collections.abc.Sequence):
                     val = obj[self.fields.index(field)]
-                    return field.pack_value(val)
+                    field.pack_value(dg, val)
+                    return
                 else:
                     raise AttributeError
             except AttributeError as e:
                 assert field.parameter.default is not None
-                return field.pack_default()
+                field.pack_default(dg)
 
     def ai_database_generate_context(self, context_id, parent_id, zone_id, owner_channel, database_server_id, from_channel_id):
         dg = Datagram()
@@ -987,7 +1040,7 @@ class DClass:
 
         for field in self.inherited_fields:
             if not isinstance(field, MolecularField) and field.is_required:
-                dg.append_data(field.pack_default())
+                field.pack_default(dg)
 
         return dg
 
@@ -1009,8 +1062,9 @@ class DClass:
 
         return dg
 
-    def pack_value(self, obj):
-        return b''.join((self.pack_field(obj, field) for field in self.fields))
+    def pack_value(self, dg, obj):
+        for field in self.fields:
+            self.pack_field(dg, obj, field)
 
     def unpack_value(self, dgi):
         return [field.unpack_value(dgi) for field in self.fields]
