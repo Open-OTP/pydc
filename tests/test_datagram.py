@@ -1,6 +1,7 @@
 import unittest
 import struct
 import random
+import array
 
 
 from dc.util import Datagram
@@ -73,6 +74,10 @@ class TestDatagram(unittest.TestCase):
 
         dg.add_bytes(b'')
         self.assertEqual(dg.get_message().tobytes(), other)
+
+        dg = Datagram()
+        dg.add_string16(b'')
+        self.assertEqual(dg.get_message().tobytes(), b'\x00\x00')
 
         dg = Datagram()
 
@@ -148,6 +153,18 @@ class TestDatagram(unittest.TestCase):
         self.assertEqual(dgi.get_int64(), -352793)
         self.assertEqual(dgi.get_string32(), 'overwrite')
 
+    def test_server_header(self):
+        dg = Datagram()
+        targets = [4200, 2878, 300, 1]
+        dg.add_server_header(targets, 10000000, 1)
+        dgi = dg.iterator()
+        self.assertEqual(dgi.get_uint8(), 4)
+        self.assertEqual(dgi.get_channel(), 4200)
+        self.assertEqual(dgi.get_channel(), 2878)
+        self.assertEqual(dgi.get_channel(), 300)
+        self.assertEqual(dgi.get_channel(), 1)
+        self.assertEqual(dgi.get_channel(), 10000000)
+        self.assertEqual(dgi.get_uint16(), 1)
 
 if __name__ == '__main__':
     unittest.main()

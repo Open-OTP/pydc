@@ -42,6 +42,15 @@ class TestDatagramIterator(unittest.TestCase):
         dgi.seek(999)
         self.assertEqual(dgi.remaining(), 0)
 
+    def test_get_remaining(self):
+        dg = Datagram()
+        dg.add_string16(b'test string')
+        dg.add_uint32(2525)
+
+        dgi = dg.iterator()
+        self.assertEqual(dgi.remaining(), 2 + len('test string') + 4)
+        self.assertEqual(dgi.get_remaining(), dg.get_message().tobytes())
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -949,7 +949,7 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "dc/util.pyx":7
+/* "dc/util.pyx":12
  * 
  * 
  * cdef class Datagram:             # <<<<<<<<<<<<<<
@@ -966,7 +966,7 @@ struct __pyx_obj_2dc_4util_Datagram {
 };
 
 
-/* "dc/util.pyx":152
+/* "dc/util.pyx":173
  *         return self.offset
  * 
  * cdef class DatagramIterator:             # <<<<<<<<<<<<<<
@@ -981,7 +981,7 @@ struct __pyx_obj_2dc_4util_DatagramIterator {
 };
 
 
-/* "dc/util.pyx":298
+/* "dc/util.pyx":326
  * cdef int PRIME_COUNT = initialize_primes(MAX_PRIME)
  * 
  * cdef class HashGenerator:             # <<<<<<<<<<<<<<
@@ -1073,7 +1073,7 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "dc/util.pyx":7
+/* "dc/util.pyx":12
  * 
  * 
  * cdef class Datagram:             # <<<<<<<<<<<<<<
@@ -1089,7 +1089,7 @@ static struct __pyx_vtabstruct_2dc_4util_Datagram *__pyx_vtabptr_2dc_4util_Datag
 static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_obj_2dc_4util_Datagram *, void const *, unsigned int const );
 
 
-/* "dc/util.pyx":152
+/* "dc/util.pyx":173
  *         return self.offset
  * 
  * cdef class DatagramIterator:             # <<<<<<<<<<<<<<
@@ -1320,9 +1320,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
-/* BufferIndexError.proto */
-static void __Pyx_RaiseBufferIndexError(int axis);
-
 /* MemviewSliceInit.proto */
 #define __Pyx_BUF_MAX_NDIMS %(BUF_MAX_NDIMS)d
 #define __Pyx_MEMVIEW_DIRECT   1
@@ -1348,6 +1345,14 @@ static CYTHON_INLINE int __pyx_sub_acquisition_count_locked(
 #define __PYX_XDEC_MEMVIEW(slice, have_gil) __Pyx_XDEC_MEMVIEW(slice, have_gil, __LINE__)
 static CYTHON_INLINE void __Pyx_INC_MEMVIEW(__Pyx_memviewslice *, int, int);
 static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *, int, int);
+
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
+    const char* function_name);
 
 /* ArgTypeTest.proto */
 #define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
@@ -1441,14 +1446,6 @@ static CYTHON_INLINE PyObject* __Pyx_decode_bytearray(
 
 /* None.proto */
 static CYTHON_INLINE long __Pyx_mod_long(long, long);
-
-/* RaiseDoubleKeywords.proto */
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-/* ParseKeywords.proto */
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
-    const char* function_name);
 
 /* IncludeStringH.proto */
 #include <string.h>
@@ -1815,10 +1812,13 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_short(unsigned short va
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_PY_LONG_LONG(PY_LONG_LONG value);
 
 /* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_long(unsigned long value);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_PY_LONG_LONG(unsigned PY_LONG_LONG value);
+
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* MemviewSliceCopyTemplate.proto */
 static __Pyx_memviewslice
@@ -1896,6 +1896,7 @@ static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
 static PyTypeObject *__pyx_memoryviewslice_type = 0;
+static unsigned short __pyx_v_2dc_4util_CONTROL_MESSAGE;
 static int __pyx_v_2dc_4util_MAX_PRIME;
 static int __pyx_v_2dc_4util_PRIME_COUNT;
 static PyObject *generic = 0;
@@ -1960,10 +1961,10 @@ static const char __pyx_k_O[] = "O";
 static const char __pyx_k_T[] = "T{";
   static const char __pyx_k_c[] = "c";
   static const char __pyx_k_s[] = "(%s)";
+  static const char __pyx_k__8[] = "";
   static const char __pyx_k_id[] = "id";
   static const char __pyx_k_np[] = "np";
-  static const char __pyx_k__30[] = "^";
-  static const char __pyx_k__31[] = "";
+  static const char __pyx_k__31[] = "^";
   static const char __pyx_k__32[] = ":";
 static const char __pyx_k__33[] = "}";
 static const char __pyx_k__34[] = ",";
@@ -1993,9 +1994,11 @@ static const char __pyx_k_utf_8[] = "utf-8";
 static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_msg_id[] = "msg_id";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_pickle[] = "pickle";
 static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_sender[] = "sender";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_update[] = "update";
@@ -2004,6 +2007,7 @@ static const char __pyx_k_asarray[] = "asarray";
 static const char __pyx_k_dc_util[] = "dc.util";
 static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_memview[] = "memview";
+static const char __pyx_k_targets[] = "targets";
 static const char __pyx_k_Datagram[] = "Datagram";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_getstate[] = "__getstate__";
@@ -2100,11 +2104,11 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_View_MemoryView;
-static PyObject *__pyx_kp_b__30;
 static PyObject *__pyx_kp_b__31;
 static PyObject *__pyx_kp_b__32;
 static PyObject *__pyx_kp_b__33;
 static PyObject *__pyx_kp_u__34;
+static PyObject *__pyx_kp_b__8;
 static PyObject *__pyx_n_s_add_bytes;
 static PyObject *__pyx_n_s_add_int;
 static PyObject *__pyx_n_s_add_uint64;
@@ -2144,6 +2148,7 @@ static PyObject *__pyx_n_s_join;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
+static PyObject *__pyx_n_s_msg_id;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndim;
@@ -2167,6 +2172,7 @@ static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_kp_u_s;
+static PyObject *__pyx_n_s_sender;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_shape;
@@ -2180,6 +2186,7 @@ static PyObject *__pyx_kp_s_strided_and_direct_or_indirect;
 static PyObject *__pyx_kp_s_strided_and_indirect;
 static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_struct;
+static PyObject *__pyx_n_s_targets;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_u_tried_reading_past_datagram;
 static PyObject *__pyx_kp_u_tried_reading_past_datagram_stri;
@@ -2205,16 +2212,18 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
 static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, __Pyx_memviewslice __pyx_v_data); /* proto */
 static PyObject *__pyx_pf_2dc_4util_8Datagram_26add_float32(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, float __pyx_v_value); /* proto */
 static PyObject *__pyx_pf_2dc_4util_8Datagram_28add_float64(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, double __pyx_v_value); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_datagram(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, struct __pyx_obj_2dc_4util_Datagram *__pyx_v_dg); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_34get_length(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, unsigned int __pyx_v_n); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_44tell(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_46__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_8Datagram_48__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_server_header(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, PyObject *__pyx_v_targets, PY_LONG_LONG __pyx_v_sender, unsigned short __pyx_v_msg_id); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_32add_server_control_header(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, unsigned short __pyx_v_msg_id); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_34add_datagram(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, struct __pyx_obj_2dc_4util_Datagram *__pyx_v_dg); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_36get_message(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_38get_length(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static void __pyx_pf_2dc_4util_8Datagram_40__dealloc__(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_42iterator(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_44copy(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_46seek(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, unsigned int __pyx_v_n); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_48tell(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_50__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_8Datagram_52__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_2dc_4util_16DatagramIterator___cinit__(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
@@ -2232,10 +2241,11 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_28seek(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self, int __pyx_v_n); /* proto */
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_30skip(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self, unsigned int __pyx_v_n); /* proto */
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34tell(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36get_channel(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_38__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_40__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34get_remaining(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36tell(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_38get_channel(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_40__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_42__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_2dc_4util_13HashGenerator___cinit__(struct __pyx_obj_2dc_4util_HashGenerator *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_2dc_4util_13HashGenerator_2add_int(struct __pyx_obj_2dc_4util_HashGenerator *__pyx_v_self, int __pyx_v_n); /* proto */
 static PyObject *__pyx_pf_2dc_4util_13HashGenerator_4add_bytes(struct __pyx_obj_2dc_4util_HashGenerator *__pyx_v_self, __Pyx_memviewslice __pyx_v_data); /* proto */
@@ -2305,9 +2315,8 @@ static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_slice__26;
+static PyObject *__pyx_slice__27;
 static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__12;
@@ -2324,9 +2333,10 @@ static PyObject *__pyx_tuple__22;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__24;
 static PyObject *__pyx_tuple__25;
-static PyObject *__pyx_tuple__27;
+static PyObject *__pyx_tuple__26;
 static PyObject *__pyx_tuple__28;
 static PyObject *__pyx_tuple__29;
+static PyObject *__pyx_tuple__30;
 static PyObject *__pyx_tuple__36;
 static PyObject *__pyx_tuple__37;
 static PyObject *__pyx_tuple__38;
@@ -2337,7 +2347,7 @@ static PyObject *__pyx_codeobj__35;
 static PyObject *__pyx_codeobj__42;
 /* Late includes */
 
-/* "dc/util.pyx":13
+/* "dc/util.pyx":18
  *     cdef unsigned int buffer_size
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2366,7 +2376,7 @@ static int __pyx_pf_2dc_4util_8Datagram___cinit__(struct __pyx_obj_2dc_4util_Dat
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "dc/util.pyx":14
+  /* "dc/util.pyx":19
  * 
  *     def __cinit__(self):
  *         self.length = 0             # <<<<<<<<<<<<<<
@@ -2375,7 +2385,7 @@ static int __pyx_pf_2dc_4util_8Datagram___cinit__(struct __pyx_obj_2dc_4util_Dat
  */
   __pyx_v_self->length = 0;
 
-  /* "dc/util.pyx":15
+  /* "dc/util.pyx":20
  *     def __cinit__(self):
  *         self.length = 0
  *         self.offset = 0             # <<<<<<<<<<<<<<
@@ -2384,7 +2394,7 @@ static int __pyx_pf_2dc_4util_8Datagram___cinit__(struct __pyx_obj_2dc_4util_Dat
  */
   __pyx_v_self->offset = 0;
 
-  /* "dc/util.pyx":16
+  /* "dc/util.pyx":21
  *         self.length = 0
  *         self.offset = 0
  *         self.buffer_size = 64             # <<<<<<<<<<<<<<
@@ -2393,7 +2403,7 @@ static int __pyx_pf_2dc_4util_8Datagram___cinit__(struct __pyx_obj_2dc_4util_Dat
  */
   __pyx_v_self->buffer_size = 64;
 
-  /* "dc/util.pyx":17
+  /* "dc/util.pyx":22
  *         self.offset = 0
  *         self.buffer_size = 64
  *         self.buffer = <unsigned char *>malloc(self.buffer_size)             # <<<<<<<<<<<<<<
@@ -2402,7 +2412,7 @@ static int __pyx_pf_2dc_4util_8Datagram___cinit__(struct __pyx_obj_2dc_4util_Dat
  */
   __pyx_v_self->buffer = ((unsigned char *)malloc(__pyx_v_self->buffer_size));
 
-  /* "dc/util.pyx":13
+  /* "dc/util.pyx":18
  *     cdef unsigned int buffer_size
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2416,7 +2426,7 @@ static int __pyx_pf_2dc_4util_8Datagram___cinit__(struct __pyx_obj_2dc_4util_Dat
   return __pyx_r;
 }
 
-/* "dc/util.pyx":19
+/* "dc/util.pyx":24
  *         self.buffer = <unsigned char *>malloc(self.buffer_size)
  * 
  *     cdef void check_resize(self, const unsigned int min_size):             # <<<<<<<<<<<<<<
@@ -2429,7 +2439,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("check_resize", 0);
 
-  /* "dc/util.pyx":20
+  /* "dc/util.pyx":25
  * 
  *     cdef void check_resize(self, const unsigned int min_size):
  *         if self.buffer_size >= min_size:             # <<<<<<<<<<<<<<
@@ -2439,7 +2449,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
   __pyx_t_1 = ((__pyx_v_self->buffer_size >= __pyx_v_min_size) != 0);
   if (__pyx_t_1) {
 
-    /* "dc/util.pyx":21
+    /* "dc/util.pyx":26
  *     cdef void check_resize(self, const unsigned int min_size):
  *         if self.buffer_size >= min_size:
  *             return             # <<<<<<<<<<<<<<
@@ -2448,7 +2458,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
  */
     goto __pyx_L0;
 
-    /* "dc/util.pyx":20
+    /* "dc/util.pyx":25
  * 
  *     cdef void check_resize(self, const unsigned int min_size):
  *         if self.buffer_size >= min_size:             # <<<<<<<<<<<<<<
@@ -2457,7 +2467,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
  */
   }
 
-  /* "dc/util.pyx":23
+  /* "dc/util.pyx":28
  *             return
  * 
  *         while self.buffer_size < min_size:             # <<<<<<<<<<<<<<
@@ -2468,7 +2478,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
     __pyx_t_1 = ((__pyx_v_self->buffer_size < __pyx_v_min_size) != 0);
     if (!__pyx_t_1) break;
 
-    /* "dc/util.pyx":24
+    /* "dc/util.pyx":29
  * 
  *         while self.buffer_size < min_size:
  *             self.buffer_size *= 2             # <<<<<<<<<<<<<<
@@ -2478,7 +2488,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
     __pyx_v_self->buffer_size = (__pyx_v_self->buffer_size * 2);
   }
 
-  /* "dc/util.pyx":26
+  /* "dc/util.pyx":31
  *             self.buffer_size *= 2
  * 
  *         self.buffer = <unsigned char *>realloc(self.buffer, self.buffer_size)             # <<<<<<<<<<<<<<
@@ -2487,7 +2497,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
  */
   __pyx_v_self->buffer = ((unsigned char *)realloc(__pyx_v_self->buffer, __pyx_v_self->buffer_size));
 
-  /* "dc/util.pyx":19
+  /* "dc/util.pyx":24
  *         self.buffer = <unsigned char *>malloc(self.buffer_size)
  * 
  *     cdef void check_resize(self, const unsigned int min_size):             # <<<<<<<<<<<<<<
@@ -2500,7 +2510,7 @@ static void __pyx_f_2dc_4util_8Datagram_check_resize(struct __pyx_obj_2dc_4util_
   __Pyx_RefNannyFinishContext();
 }
 
-/* "dc/util.pyx":28
+/* "dc/util.pyx":33
  *         self.buffer = <unsigned char *>realloc(self.buffer, self.buffer_size)
  * 
  *     cdef inline void append_data(self, const void* value, const unsigned int value_size):             # <<<<<<<<<<<<<<
@@ -2517,7 +2527,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("append_data", 0);
 
-  /* "dc/util.pyx":29
+  /* "dc/util.pyx":34
  * 
  *     cdef inline void append_data(self, const void* value, const unsigned int value_size):
  *         cdef unsigned int new_size = max(self.offset + value_size, self.length)             # <<<<<<<<<<<<<<
@@ -2533,7 +2543,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
   }
   __pyx_v_new_size = __pyx_t_3;
 
-  /* "dc/util.pyx":30
+  /* "dc/util.pyx":35
  *     cdef inline void append_data(self, const void* value, const unsigned int value_size):
  *         cdef unsigned int new_size = max(self.offset + value_size, self.length)
  *         self.check_resize(new_size)             # <<<<<<<<<<<<<<
@@ -2542,7 +2552,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
  */
   ((struct __pyx_vtabstruct_2dc_4util_Datagram *)__pyx_v_self->__pyx_vtab)->check_resize(__pyx_v_self, __pyx_v_new_size);
 
-  /* "dc/util.pyx":31
+  /* "dc/util.pyx":36
  *         cdef unsigned int new_size = max(self.offset + value_size, self.length)
  *         self.check_resize(new_size)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2552,7 +2562,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
   __pyx_t_4 = ((__pyx_v_self->buffer == NULL) != 0);
   if (__pyx_t_4) {
 
-    /* "dc/util.pyx":32
+    /* "dc/util.pyx":37
  *         self.check_resize(new_size)
  *         if self.buffer is NULL:
  *             return             # <<<<<<<<<<<<<<
@@ -2561,7 +2571,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
  */
     goto __pyx_L0;
 
-    /* "dc/util.pyx":31
+    /* "dc/util.pyx":36
  *         cdef unsigned int new_size = max(self.offset + value_size, self.length)
  *         self.check_resize(new_size)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2570,7 +2580,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
  */
   }
 
-  /* "dc/util.pyx":33
+  /* "dc/util.pyx":38
  *         if self.buffer is NULL:
  *             return
  *         memcpy(&self.buffer[self.offset], value, value_size)             # <<<<<<<<<<<<<<
@@ -2579,7 +2589,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
  */
   (void)(memcpy((&(__pyx_v_self->buffer[__pyx_v_self->offset])), __pyx_v_value, __pyx_v_value_size));
 
-  /* "dc/util.pyx":34
+  /* "dc/util.pyx":39
  *             return
  *         memcpy(&self.buffer[self.offset], value, value_size)
  *         self.length = new_size             # <<<<<<<<<<<<<<
@@ -2588,7 +2598,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
  */
   __pyx_v_self->length = __pyx_v_new_size;
 
-  /* "dc/util.pyx":35
+  /* "dc/util.pyx":40
  *         memcpy(&self.buffer[self.offset], value, value_size)
  *         self.length = new_size
  *         self.offset += value_size             # <<<<<<<<<<<<<<
@@ -2597,7 +2607,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
  */
   __pyx_v_self->offset = (__pyx_v_self->offset + __pyx_v_value_size);
 
-  /* "dc/util.pyx":28
+  /* "dc/util.pyx":33
  *         self.buffer = <unsigned char *>realloc(self.buffer, self.buffer_size)
  * 
  *     cdef inline void append_data(self, const void* value, const unsigned int value_size):             # <<<<<<<<<<<<<<
@@ -2610,7 +2620,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_8Datagram_append_data(struct __pyx_o
   __Pyx_RefNannyFinishContext();
 }
 
-/* "dc/util.pyx":37
+/* "dc/util.pyx":42
  *         self.offset += value_size
  * 
  *     def add_int8(self, const char value):             # <<<<<<<<<<<<<<
@@ -2626,7 +2636,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_3add_int8(PyObject *__pyx_v_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_int8 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_char(__pyx_arg_value); if (unlikely((__pyx_v_value == (char)-1) && PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_char(__pyx_arg_value); if (unlikely((__pyx_v_value == (char)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2648,7 +2658,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_2add_int8(struct __pyx_obj_2dc_4ut
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_int8", 0);
 
-  /* "dc/util.pyx":38
+  /* "dc/util.pyx":43
  * 
  *     def add_int8(self, const char value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -2657,7 +2667,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_2add_int8(struct __pyx_obj_2dc_4ut
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":39
+  /* "dc/util.pyx":44
  *     def add_int8(self, const char value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2667,20 +2677,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_2add_int8(struct __pyx_obj_2dc_4ut
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":40
+    /* "dc/util.pyx":45
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_uint8(self, const unsigned char value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 40, __pyx_L1_error)
+    __PYX_ERR(0, 45, __pyx_L1_error)
 
-    /* "dc/util.pyx":39
+    /* "dc/util.pyx":44
  *     def add_int8(self, const char value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2689,7 +2699,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_2add_int8(struct __pyx_obj_2dc_4ut
  */
   }
 
-  /* "dc/util.pyx":37
+  /* "dc/util.pyx":42
  *         self.offset += value_size
  * 
  *     def add_int8(self, const char value):             # <<<<<<<<<<<<<<
@@ -2710,7 +2720,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_2add_int8(struct __pyx_obj_2dc_4ut
   return __pyx_r;
 }
 
-/* "dc/util.pyx":42
+/* "dc/util.pyx":47
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint8(self, const unsigned char value):             # <<<<<<<<<<<<<<
@@ -2726,7 +2736,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_5add_uint8(PyObject *__pyx_v_self,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_uint8 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_unsigned_char(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned char)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_unsigned_char(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned char)-1) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2748,7 +2758,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_4add_uint8(struct __pyx_obj_2dc_4u
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_uint8", 0);
 
-  /* "dc/util.pyx":43
+  /* "dc/util.pyx":48
  * 
  *     def add_uint8(self, const unsigned char value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -2757,7 +2767,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_4add_uint8(struct __pyx_obj_2dc_4u
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":44
+  /* "dc/util.pyx":49
  *     def add_uint8(self, const unsigned char value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2767,20 +2777,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_4add_uint8(struct __pyx_obj_2dc_4u
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":45
+    /* "dc/util.pyx":50
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_int16(self, const short value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 45, __pyx_L1_error)
+    __PYX_ERR(0, 50, __pyx_L1_error)
 
-    /* "dc/util.pyx":44
+    /* "dc/util.pyx":49
  *     def add_uint8(self, const unsigned char value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2789,7 +2799,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_4add_uint8(struct __pyx_obj_2dc_4u
  */
   }
 
-  /* "dc/util.pyx":42
+  /* "dc/util.pyx":47
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint8(self, const unsigned char value):             # <<<<<<<<<<<<<<
@@ -2810,7 +2820,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_4add_uint8(struct __pyx_obj_2dc_4u
   return __pyx_r;
 }
 
-/* "dc/util.pyx":47
+/* "dc/util.pyx":52
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_int16(self, const short value):             # <<<<<<<<<<<<<<
@@ -2826,7 +2836,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_7add_int16(PyObject *__pyx_v_self,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_int16 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_short(__pyx_arg_value); if (unlikely((__pyx_v_value == (short)-1) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_short(__pyx_arg_value); if (unlikely((__pyx_v_value == (short)-1) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2848,7 +2858,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_6add_int16(struct __pyx_obj_2dc_4u
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_int16", 0);
 
-  /* "dc/util.pyx":48
+  /* "dc/util.pyx":53
  * 
  *     def add_int16(self, const short value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -2857,7 +2867,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_6add_int16(struct __pyx_obj_2dc_4u
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":49
+  /* "dc/util.pyx":54
  *     def add_int16(self, const short value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2867,20 +2877,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_6add_int16(struct __pyx_obj_2dc_4u
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":50
+    /* "dc/util.pyx":55
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_uint16(self, const unsigned short value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 50, __pyx_L1_error)
+    __PYX_ERR(0, 55, __pyx_L1_error)
 
-    /* "dc/util.pyx":49
+    /* "dc/util.pyx":54
  *     def add_int16(self, const short value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2889,7 +2899,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_6add_int16(struct __pyx_obj_2dc_4u
  */
   }
 
-  /* "dc/util.pyx":47
+  /* "dc/util.pyx":52
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_int16(self, const short value):             # <<<<<<<<<<<<<<
@@ -2910,7 +2920,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_6add_int16(struct __pyx_obj_2dc_4u
   return __pyx_r;
 }
 
-/* "dc/util.pyx":52
+/* "dc/util.pyx":57
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint16(self, const unsigned short value):             # <<<<<<<<<<<<<<
@@ -2926,7 +2936,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_9add_uint16(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_uint16 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_unsigned_short(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_unsigned_short(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2948,7 +2958,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_8add_uint16(struct __pyx_obj_2dc_4
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_uint16", 0);
 
-  /* "dc/util.pyx":53
+  /* "dc/util.pyx":58
  * 
  *     def add_uint16(self, const unsigned short value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -2957,7 +2967,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_8add_uint16(struct __pyx_obj_2dc_4
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":54
+  /* "dc/util.pyx":59
  *     def add_uint16(self, const unsigned short value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2967,20 +2977,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_8add_uint16(struct __pyx_obj_2dc_4
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":55
+    /* "dc/util.pyx":60
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_int32(self, const int value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 55, __pyx_L1_error)
+    __PYX_ERR(0, 60, __pyx_L1_error)
 
-    /* "dc/util.pyx":54
+    /* "dc/util.pyx":59
  *     def add_uint16(self, const unsigned short value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -2989,7 +2999,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_8add_uint16(struct __pyx_obj_2dc_4
  */
   }
 
-  /* "dc/util.pyx":52
+  /* "dc/util.pyx":57
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint16(self, const unsigned short value):             # <<<<<<<<<<<<<<
@@ -3010,7 +3020,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_8add_uint16(struct __pyx_obj_2dc_4
   return __pyx_r;
 }
 
-/* "dc/util.pyx":57
+/* "dc/util.pyx":62
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_int32(self, const int value):             # <<<<<<<<<<<<<<
@@ -3026,7 +3036,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_11add_int32(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_int32 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3048,7 +3058,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_10add_int32(struct __pyx_obj_2dc_4
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_int32", 0);
 
-  /* "dc/util.pyx":58
+  /* "dc/util.pyx":63
  * 
  *     def add_int32(self, const int value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -3057,7 +3067,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_10add_int32(struct __pyx_obj_2dc_4
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":59
+  /* "dc/util.pyx":64
  *     def add_int32(self, const int value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3067,20 +3077,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_10add_int32(struct __pyx_obj_2dc_4
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":60
+    /* "dc/util.pyx":65
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_uint32(self, const unsigned int value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 60, __pyx_L1_error)
+    __PYX_ERR(0, 65, __pyx_L1_error)
 
-    /* "dc/util.pyx":59
+    /* "dc/util.pyx":64
  *     def add_int32(self, const int value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3089,7 +3099,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_10add_int32(struct __pyx_obj_2dc_4
  */
   }
 
-  /* "dc/util.pyx":57
+  /* "dc/util.pyx":62
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_int32(self, const int value):             # <<<<<<<<<<<<<<
@@ -3110,7 +3120,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_10add_int32(struct __pyx_obj_2dc_4
   return __pyx_r;
 }
 
-/* "dc/util.pyx":62
+/* "dc/util.pyx":67
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint32(self, const unsigned int value):             # <<<<<<<<<<<<<<
@@ -3126,7 +3136,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_13add_uint32(PyObject *__pyx_v_sel
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_uint32 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_unsigned_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_unsigned_int(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 67, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3148,7 +3158,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_12add_uint32(struct __pyx_obj_2dc_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_uint32", 0);
 
-  /* "dc/util.pyx":63
+  /* "dc/util.pyx":68
  * 
  *     def add_uint32(self, const unsigned int value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -3157,7 +3167,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_12add_uint32(struct __pyx_obj_2dc_
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":64
+  /* "dc/util.pyx":69
  *     def add_uint32(self, const unsigned int value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3167,20 +3177,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_12add_uint32(struct __pyx_obj_2dc_
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":65
+    /* "dc/util.pyx":70
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_int64(self, const long long value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 65, __pyx_L1_error)
+    __PYX_ERR(0, 70, __pyx_L1_error)
 
-    /* "dc/util.pyx":64
+    /* "dc/util.pyx":69
  *     def add_uint32(self, const unsigned int value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3189,7 +3199,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_12add_uint32(struct __pyx_obj_2dc_
  */
   }
 
-  /* "dc/util.pyx":62
+  /* "dc/util.pyx":67
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint32(self, const unsigned int value):             # <<<<<<<<<<<<<<
@@ -3210,7 +3220,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_12add_uint32(struct __pyx_obj_2dc_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":67
+/* "dc/util.pyx":72
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_int64(self, const long long value):             # <<<<<<<<<<<<<<
@@ -3226,7 +3236,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_15add_int64(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_int64 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_arg_value); if (unlikely((__pyx_v_value == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 67, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_arg_value); if (unlikely((__pyx_v_value == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3248,7 +3258,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_14add_int64(struct __pyx_obj_2dc_4
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_int64", 0);
 
-  /* "dc/util.pyx":68
+  /* "dc/util.pyx":73
  * 
  *     def add_int64(self, const long long value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -3257,7 +3267,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_14add_int64(struct __pyx_obj_2dc_4
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":69
+  /* "dc/util.pyx":74
  *     def add_int64(self, const long long value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3267,20 +3277,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_14add_int64(struct __pyx_obj_2dc_4
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":70
+    /* "dc/util.pyx":75
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_uint64(self, const unsigned long long value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 70, __pyx_L1_error)
+    __PYX_ERR(0, 75, __pyx_L1_error)
 
-    /* "dc/util.pyx":69
+    /* "dc/util.pyx":74
  *     def add_int64(self, const long long value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3289,7 +3299,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_14add_int64(struct __pyx_obj_2dc_4
  */
   }
 
-  /* "dc/util.pyx":67
+  /* "dc/util.pyx":72
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_int64(self, const long long value):             # <<<<<<<<<<<<<<
@@ -3310,7 +3320,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_14add_int64(struct __pyx_obj_2dc_4
   return __pyx_r;
 }
 
-/* "dc/util.pyx":72
+/* "dc/util.pyx":77
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint64(self, const unsigned long long value):             # <<<<<<<<<<<<<<
@@ -3326,7 +3336,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_17add_uint64(PyObject *__pyx_v_sel
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_uint64 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __Pyx_PyInt_As_unsigned_PY_LONG_LONG(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L3_error)
+    __pyx_v_value = __Pyx_PyInt_As_unsigned_PY_LONG_LONG(__pyx_arg_value); if (unlikely((__pyx_v_value == (unsigned PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3348,7 +3358,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_16add_uint64(struct __pyx_obj_2dc_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_uint64", 0);
 
-  /* "dc/util.pyx":73
+  /* "dc/util.pyx":78
  * 
  *     def add_uint64(self, const unsigned long long value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -3357,7 +3367,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_16add_uint64(struct __pyx_obj_2dc_
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":74
+  /* "dc/util.pyx":79
  *     def add_uint64(self, const unsigned long long value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3367,20 +3377,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_16add_uint64(struct __pyx_obj_2dc_
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":75
+    /* "dc/util.pyx":80
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_channel(self, value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 75, __pyx_L1_error)
+    __PYX_ERR(0, 80, __pyx_L1_error)
 
-    /* "dc/util.pyx":74
+    /* "dc/util.pyx":79
  *     def add_uint64(self, const unsigned long long value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3389,7 +3399,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_16add_uint64(struct __pyx_obj_2dc_
  */
   }
 
-  /* "dc/util.pyx":72
+  /* "dc/util.pyx":77
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_uint64(self, const unsigned long long value):             # <<<<<<<<<<<<<<
@@ -3410,7 +3420,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_16add_uint64(struct __pyx_obj_2dc_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":77
+/* "dc/util.pyx":82
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_channel(self, value):             # <<<<<<<<<<<<<<
@@ -3439,14 +3449,14 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_18add_channel(struct __pyx_obj_2dc
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("add_channel", 0);
 
-  /* "dc/util.pyx":78
+  /* "dc/util.pyx":83
  * 
  *     def add_channel(self, value):
  *         self.add_uint64(value)             # <<<<<<<<<<<<<<
  * 
  *     def add_bytes(self, const unsigned char[:] data):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_uint64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_uint64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3460,12 +3470,12 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_18add_channel(struct __pyx_obj_2dc
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_value) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_value);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "dc/util.pyx":77
+  /* "dc/util.pyx":82
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_channel(self, value):             # <<<<<<<<<<<<<<
@@ -3488,7 +3498,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_18add_channel(struct __pyx_obj_2dc
   return __pyx_r;
 }
 
-/* "dc/util.pyx":80
+/* "dc/util.pyx":85
  *         self.add_uint64(value)
  * 
  *     def add_bytes(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -3504,7 +3514,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_21add_bytes(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_bytes (wrapper)", 0);
   assert(__pyx_arg_data); {
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 80, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 85, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3526,27 +3536,26 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_20add_bytes(struct __pyx_obj_2dc_4
   PyObject *__pyx_t_2 = NULL;
   int __pyx_t_3;
   Py_ssize_t __pyx_t_4;
-  int __pyx_t_5;
-  unsigned int __pyx_t_6;
+  unsigned int __pyx_t_5;
   __Pyx_RefNannySetupContext("add_bytes", 0);
 
-  /* "dc/util.pyx":81
+  /* "dc/util.pyx":86
  * 
  *     def add_bytes(self, const unsigned char[:] data):
  *         if data.size:             # <<<<<<<<<<<<<<
  *             self.append_data(&data[0], data.size)
  *         if self.buffer is NULL:
  */
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "dc/util.pyx":82
+    /* "dc/util.pyx":87
  *     def add_bytes(self, const unsigned char[:] data):
  *         if data.size:
  *             self.append_data(&data[0], data.size)             # <<<<<<<<<<<<<<
@@ -3554,25 +3563,16 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_20add_bytes(struct __pyx_obj_2dc_4
  *             raise MemoryError('could not allocate memory for datagram')
  */
     __pyx_t_4 = 0;
-    __pyx_t_5 = -1;
-    if (__pyx_t_4 < 0) {
-      __pyx_t_4 += __pyx_v_data.shape[0];
-      if (unlikely(__pyx_t_4 < 0)) __pyx_t_5 = 0;
-    } else if (unlikely(__pyx_t_4 >= __pyx_v_data.shape[0])) __pyx_t_5 = 0;
-    if (unlikely(__pyx_t_5 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_5);
-      __PYX_ERR(0, 82, __pyx_L1_error)
-    }
-    __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+    __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_6 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&(*((unsigned char const  *) ( /* dim=0 */ (__pyx_v_data.data + __pyx_t_4 * __pyx_v_data.strides[0]) )))), __pyx_t_6);
+    __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&(*((unsigned char const  *) ( /* dim=0 */ (__pyx_v_data.data + __pyx_t_4 * __pyx_v_data.strides[0]) )))), __pyx_t_5);
 
-    /* "dc/util.pyx":81
+    /* "dc/util.pyx":86
  * 
  *     def add_bytes(self, const unsigned char[:] data):
  *         if data.size:             # <<<<<<<<<<<<<<
@@ -3581,7 +3581,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_20add_bytes(struct __pyx_obj_2dc_4
  */
   }
 
-  /* "dc/util.pyx":83
+  /* "dc/util.pyx":88
  *         if data.size:
  *             self.append_data(&data[0], data.size)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3591,20 +3591,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_20add_bytes(struct __pyx_obj_2dc_4
   __pyx_t_3 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "dc/util.pyx":84
+    /* "dc/util.pyx":89
  *             self.append_data(&data[0], data.size)
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_string16(self, const unsigned char[:] data):
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 84, __pyx_L1_error)
+    __PYX_ERR(0, 89, __pyx_L1_error)
 
-    /* "dc/util.pyx":83
+    /* "dc/util.pyx":88
  *         if data.size:
  *             self.append_data(&data[0], data.size)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3613,7 +3613,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_20add_bytes(struct __pyx_obj_2dc_4
  */
   }
 
-  /* "dc/util.pyx":80
+  /* "dc/util.pyx":85
  *         self.add_uint64(value)
  * 
  *     def add_bytes(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -3636,7 +3636,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_20add_bytes(struct __pyx_obj_2dc_4
   return __pyx_r;
 }
 
-/* "dc/util.pyx":86
+/* "dc/util.pyx":91
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_string16(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -3652,7 +3652,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_23add_string16(PyObject *__pyx_v_s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_string16 (wrapper)", 0);
   assert(__pyx_arg_data); {
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 91, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3676,26 +3676,25 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
   unsigned short __pyx_t_3;
   int __pyx_t_4;
   Py_ssize_t __pyx_t_5;
-  int __pyx_t_6;
   __Pyx_RefNannySetupContext("add_string16", 0);
 
-  /* "dc/util.pyx":87
+  /* "dc/util.pyx":92
  * 
  *     def add_string16(self, const unsigned char[:] data):
  *         cdef unsigned short string_length = data.size             # <<<<<<<<<<<<<<
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:
  */
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_unsigned_short(__pyx_t_2); if (unlikely((__pyx_t_3 == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_unsigned_short(__pyx_t_2); if (unlikely((__pyx_t_3 == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_string_length = __pyx_t_3;
 
-  /* "dc/util.pyx":88
+  /* "dc/util.pyx":93
  *     def add_string16(self, const unsigned char[:] data):
  *         cdef unsigned short string_length = data.size
  *         self.append_data(&string_length, sizeof(string_length))             # <<<<<<<<<<<<<<
@@ -3704,7 +3703,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_string_length), (sizeof(__pyx_v_string_length)));
 
-  /* "dc/util.pyx":89
+  /* "dc/util.pyx":94
  *         cdef unsigned short string_length = data.size
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:             # <<<<<<<<<<<<<<
@@ -3714,7 +3713,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
   __pyx_t_4 = (__pyx_v_string_length != 0);
   if (__pyx_t_4) {
 
-    /* "dc/util.pyx":90
+    /* "dc/util.pyx":95
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:
  *             self.append_data(&data[0], string_length)             # <<<<<<<<<<<<<<
@@ -3722,18 +3721,9 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
  *             raise MemoryError('could not allocate memory for datagram')
  */
     __pyx_t_5 = 0;
-    __pyx_t_6 = -1;
-    if (__pyx_t_5 < 0) {
-      __pyx_t_5 += __pyx_v_data.shape[0];
-      if (unlikely(__pyx_t_5 < 0)) __pyx_t_6 = 0;
-    } else if (unlikely(__pyx_t_5 >= __pyx_v_data.shape[0])) __pyx_t_6 = 0;
-    if (unlikely(__pyx_t_6 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_6);
-      __PYX_ERR(0, 90, __pyx_L1_error)
-    }
     __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&(*((unsigned char const  *) ( /* dim=0 */ (__pyx_v_data.data + __pyx_t_5 * __pyx_v_data.strides[0]) )))), __pyx_v_string_length);
 
-    /* "dc/util.pyx":89
+    /* "dc/util.pyx":94
  *         cdef unsigned short string_length = data.size
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:             # <<<<<<<<<<<<<<
@@ -3742,7 +3732,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
  */
   }
 
-  /* "dc/util.pyx":91
+  /* "dc/util.pyx":96
  *         if string_length:
  *             self.append_data(&data[0], string_length)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3752,20 +3742,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
   __pyx_t_4 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_4)) {
 
-    /* "dc/util.pyx":92
+    /* "dc/util.pyx":97
  *             self.append_data(&data[0], string_length)
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_string32(self, const unsigned char[:] data):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 92, __pyx_L1_error)
+    __PYX_ERR(0, 97, __pyx_L1_error)
 
-    /* "dc/util.pyx":91
+    /* "dc/util.pyx":96
  *         if string_length:
  *             self.append_data(&data[0], string_length)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3774,7 +3764,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
  */
   }
 
-  /* "dc/util.pyx":86
+  /* "dc/util.pyx":91
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_string16(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -3797,7 +3787,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_22add_string16(struct __pyx_obj_2d
   return __pyx_r;
 }
 
-/* "dc/util.pyx":94
+/* "dc/util.pyx":99
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_string32(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -3813,7 +3803,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_25add_string32(PyObject *__pyx_v_s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_string32 (wrapper)", 0);
   assert(__pyx_arg_data); {
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 94, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 99, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3837,26 +3827,25 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
   unsigned int __pyx_t_3;
   int __pyx_t_4;
   Py_ssize_t __pyx_t_5;
-  int __pyx_t_6;
   __Pyx_RefNannySetupContext("add_string32", 0);
 
-  /* "dc/util.pyx":95
+  /* "dc/util.pyx":100
  * 
  *     def add_string32(self, const unsigned char[:] data):
  *         cdef unsigned int string_length = data.size             # <<<<<<<<<<<<<<
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:
  */
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_unsigned_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_unsigned_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_string_length = __pyx_t_3;
 
-  /* "dc/util.pyx":96
+  /* "dc/util.pyx":101
  *     def add_string32(self, const unsigned char[:] data):
  *         cdef unsigned int string_length = data.size
  *         self.append_data(&string_length, sizeof(string_length))             # <<<<<<<<<<<<<<
@@ -3865,7 +3854,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_string_length), (sizeof(__pyx_v_string_length)));
 
-  /* "dc/util.pyx":97
+  /* "dc/util.pyx":102
  *         cdef unsigned int string_length = data.size
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:             # <<<<<<<<<<<<<<
@@ -3875,7 +3864,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
   __pyx_t_4 = (__pyx_v_string_length != 0);
   if (__pyx_t_4) {
 
-    /* "dc/util.pyx":98
+    /* "dc/util.pyx":103
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:
  *             self.append_data(&data[0], string_length)             # <<<<<<<<<<<<<<
@@ -3883,18 +3872,9 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
  *             raise MemoryError('could not allocate memory for datagram')
  */
     __pyx_t_5 = 0;
-    __pyx_t_6 = -1;
-    if (__pyx_t_5 < 0) {
-      __pyx_t_5 += __pyx_v_data.shape[0];
-      if (unlikely(__pyx_t_5 < 0)) __pyx_t_6 = 0;
-    } else if (unlikely(__pyx_t_5 >= __pyx_v_data.shape[0])) __pyx_t_6 = 0;
-    if (unlikely(__pyx_t_6 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_6);
-      __PYX_ERR(0, 98, __pyx_L1_error)
-    }
     __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&(*((unsigned char const  *) ( /* dim=0 */ (__pyx_v_data.data + __pyx_t_5 * __pyx_v_data.strides[0]) )))), __pyx_v_string_length);
 
-    /* "dc/util.pyx":97
+    /* "dc/util.pyx":102
  *         cdef unsigned int string_length = data.size
  *         self.append_data(&string_length, sizeof(string_length))
  *         if string_length:             # <<<<<<<<<<<<<<
@@ -3903,7 +3883,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
  */
   }
 
-  /* "dc/util.pyx":99
+  /* "dc/util.pyx":104
  *         if string_length:
  *             self.append_data(&data[0], string_length)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3913,20 +3893,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
   __pyx_t_4 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_4)) {
 
-    /* "dc/util.pyx":100
+    /* "dc/util.pyx":105
  *             self.append_data(&data[0], string_length)
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_float32(self, float value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 100, __pyx_L1_error)
+    __PYX_ERR(0, 105, __pyx_L1_error)
 
-    /* "dc/util.pyx":99
+    /* "dc/util.pyx":104
  *         if string_length:
  *             self.append_data(&data[0], string_length)
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -3935,7 +3915,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
  */
   }
 
-  /* "dc/util.pyx":94
+  /* "dc/util.pyx":99
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_string32(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -3958,7 +3938,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_24add_string32(struct __pyx_obj_2d
   return __pyx_r;
 }
 
-/* "dc/util.pyx":102
+/* "dc/util.pyx":107
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_float32(self, float value):             # <<<<<<<<<<<<<<
@@ -3974,7 +3954,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_27add_float32(PyObject *__pyx_v_se
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_float32 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3996,7 +3976,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_26add_float32(struct __pyx_obj_2dc
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_float32", 0);
 
-  /* "dc/util.pyx":103
+  /* "dc/util.pyx":108
  * 
  *     def add_float32(self, float value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -4005,7 +3985,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_26add_float32(struct __pyx_obj_2dc
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":104
+  /* "dc/util.pyx":109
  *     def add_float32(self, float value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4015,20 +3995,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_26add_float32(struct __pyx_obj_2dc
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":105
+    /* "dc/util.pyx":110
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_float64(self, double value):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 105, __pyx_L1_error)
+    __PYX_ERR(0, 110, __pyx_L1_error)
 
-    /* "dc/util.pyx":104
+    /* "dc/util.pyx":109
  *     def add_float32(self, float value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4037,7 +4017,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_26add_float32(struct __pyx_obj_2dc
  */
   }
 
-  /* "dc/util.pyx":102
+  /* "dc/util.pyx":107
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_float32(self, float value):             # <<<<<<<<<<<<<<
@@ -4058,7 +4038,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_26add_float32(struct __pyx_obj_2dc
   return __pyx_r;
 }
 
-/* "dc/util.pyx":107
+/* "dc/util.pyx":112
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_float64(self, double value):             # <<<<<<<<<<<<<<
@@ -4074,7 +4054,7 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_29add_float64(PyObject *__pyx_v_se
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_float64 (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __pyx_PyFloat_AsDouble(__pyx_arg_value); if (unlikely((__pyx_v_value == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsDouble(__pyx_arg_value); if (unlikely((__pyx_v_value == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4096,7 +4076,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_28add_float64(struct __pyx_obj_2dc
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_float64", 0);
 
-  /* "dc/util.pyx":108
+  /* "dc/util.pyx":113
  * 
  *     def add_float64(self, double value):
  *         self.append_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -4105,7 +4085,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_28add_float64(struct __pyx_obj_2dc
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":109
+  /* "dc/util.pyx":114
  *     def add_float64(self, double value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4115,20 +4095,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_28add_float64(struct __pyx_obj_2dc
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":110
+    /* "dc/util.pyx":115
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
- *     def add_datagram(self, Datagram dg):
+ *     def add_server_header(self, list targets, long long sender, unsigned short msg_id):
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 110, __pyx_L1_error)
+    __PYX_ERR(0, 115, __pyx_L1_error)
 
-    /* "dc/util.pyx":109
+    /* "dc/util.pyx":114
  *     def add_float64(self, double value):
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4137,7 +4117,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_28add_float64(struct __pyx_obj_2dc
  */
   }
 
-  /* "dc/util.pyx":107
+  /* "dc/util.pyx":112
  *             raise MemoryError('could not allocate memory for datagram')
  * 
  *     def add_float64(self, double value):             # <<<<<<<<<<<<<<
@@ -4158,22 +4138,81 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_28add_float64(struct __pyx_obj_2dc
   return __pyx_r;
 }
 
-/* "dc/util.pyx":112
+/* "dc/util.pyx":117
  *             raise MemoryError('could not allocate memory for datagram')
  * 
- *     def add_datagram(self, Datagram dg):             # <<<<<<<<<<<<<<
- *         self.append_data(&dg.buffer[0], dg.length)
- * 
+ *     def add_server_header(self, list targets, long long sender, unsigned short msg_id):             # <<<<<<<<<<<<<<
+ *         cdef unsigned char num_targets = len(targets)
+ *         cdef unsigned long long n
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_31add_datagram(PyObject *__pyx_v_self, PyObject *__pyx_v_dg); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_31add_datagram(PyObject *__pyx_v_self, PyObject *__pyx_v_dg) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_31add_server_header(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_31add_server_header(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_targets = 0;
+  PY_LONG_LONG __pyx_v_sender;
+  unsigned short __pyx_v_msg_id;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("add_datagram (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dg), __pyx_ptype_2dc_4util_Datagram, 1, "dg", 0))) __PYX_ERR(0, 112, __pyx_L1_error)
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_30add_datagram(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_dg));
+  __Pyx_RefNannySetupContext("add_server_header (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_targets,&__pyx_n_s_sender,&__pyx_n_s_msg_id,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_targets)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_sender)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("add_server_header", 1, 3, 3, 1); __PYX_ERR(0, 117, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_msg_id)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("add_server_header", 1, 3, 3, 2); __PYX_ERR(0, 117, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_server_header") < 0)) __PYX_ERR(0, 117, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_targets = ((PyObject*)values[0]);
+    __pyx_v_sender = __Pyx_PyInt_As_PY_LONG_LONG(values[1]); if (unlikely((__pyx_v_sender == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 117, __pyx_L3_error)
+    __pyx_v_msg_id = __Pyx_PyInt_As_unsigned_short(values[2]); if (unlikely((__pyx_v_msg_id == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 117, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("add_server_header", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 117, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("dc.util.Datagram.add_server_header", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_targets), (&PyList_Type), 1, "targets", 1))) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_30add_server_header(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), __pyx_v_targets, __pyx_v_sender, __pyx_v_msg_id);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4184,12 +4223,253 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_31add_datagram(PyObject *__pyx_v_s
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_datagram(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, struct __pyx_obj_2dc_4util_Datagram *__pyx_v_dg) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_server_header(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, PyObject *__pyx_v_targets, PY_LONG_LONG __pyx_v_sender, unsigned short __pyx_v_msg_id) {
+  unsigned char __pyx_v_num_targets;
+  unsigned PY_LONG_LONG __pyx_v_n;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  unsigned PY_LONG_LONG __pyx_t_4;
+  __Pyx_RefNannySetupContext("add_server_header", 0);
+
+  /* "dc/util.pyx":118
+ * 
+ *     def add_server_header(self, list targets, long long sender, unsigned short msg_id):
+ *         cdef unsigned char num_targets = len(targets)             # <<<<<<<<<<<<<<
+ *         cdef unsigned long long n
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ */
+  if (unlikely(__pyx_v_targets == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    __PYX_ERR(0, 118, __pyx_L1_error)
+  }
+  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_targets); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_v_num_targets = __pyx_t_1;
+
+  /* "dc/util.pyx":120
+ *         cdef unsigned char num_targets = len(targets)
+ *         cdef unsigned long long n
+ *         self.append_data(&num_targets, sizeof(num_targets))             # <<<<<<<<<<<<<<
+ *         for n in targets:
+ *             self.append_data(&n, sizeof(unsigned long long))
+ */
+  __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_num_targets), (sizeof(__pyx_v_num_targets)));
+
+  /* "dc/util.pyx":121
+ *         cdef unsigned long long n
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ *         for n in targets:             # <<<<<<<<<<<<<<
+ *             self.append_data(&n, sizeof(unsigned long long))
+ *         self.append_data(&sender,  sizeof(unsigned long long))
+ */
+  if (unlikely(__pyx_v_targets == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    __PYX_ERR(0, 121, __pyx_L1_error)
+  }
+  __pyx_t_2 = __pyx_v_targets; __Pyx_INCREF(__pyx_t_2); __pyx_t_1 = 0;
+  for (;;) {
+    if (__pyx_t_1 >= PyList_GET_SIZE(__pyx_t_2)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_1); __Pyx_INCREF(__pyx_t_3); __pyx_t_1++; if (unlikely(0 < 0)) __PYX_ERR(0, 121, __pyx_L1_error)
+    #else
+    __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    #endif
+    __pyx_t_4 = __Pyx_PyInt_As_unsigned_PY_LONG_LONG(__pyx_t_3); if (unlikely((__pyx_t_4 == (unsigned PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_v_n = __pyx_t_4;
+
+    /* "dc/util.pyx":122
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ *         for n in targets:
+ *             self.append_data(&n, sizeof(unsigned long long))             # <<<<<<<<<<<<<<
+ *         self.append_data(&sender,  sizeof(unsigned long long))
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ */
+    __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_n), (sizeof(unsigned PY_LONG_LONG)));
+
+    /* "dc/util.pyx":121
+ *         cdef unsigned long long n
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ *         for n in targets:             # <<<<<<<<<<<<<<
+ *             self.append_data(&n, sizeof(unsigned long long))
+ *         self.append_data(&sender,  sizeof(unsigned long long))
+ */
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "dc/util.pyx":123
+ *         for n in targets:
+ *             self.append_data(&n, sizeof(unsigned long long))
+ *         self.append_data(&sender,  sizeof(unsigned long long))             # <<<<<<<<<<<<<<
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ * 
+ */
+  __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_sender), (sizeof(unsigned PY_LONG_LONG)));
+
+  /* "dc/util.pyx":124
+ *             self.append_data(&n, sizeof(unsigned long long))
+ *         self.append_data(&sender,  sizeof(unsigned long long))
+ *         self.append_data(&msg_id, sizeof(msg_id))             # <<<<<<<<<<<<<<
+ * 
+ *     def add_server_control_header(self, unsigned short msg_id):
+ */
+  __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_msg_id), (sizeof(__pyx_v_msg_id)));
+
+  /* "dc/util.pyx":117
+ *             raise MemoryError('could not allocate memory for datagram')
+ * 
+ *     def add_server_header(self, list targets, long long sender, unsigned short msg_id):             # <<<<<<<<<<<<<<
+ *         cdef unsigned char num_targets = len(targets)
+ *         cdef unsigned long long n
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("dc.util.Datagram.add_server_header", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "dc/util.pyx":126
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ * 
+ *     def add_server_control_header(self, unsigned short msg_id):             # <<<<<<<<<<<<<<
+ *         cdef unsigned char num_targets = 1
+ *         cdef unsigned long long channel = CONTROL_MESSAGE
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_2dc_4util_8Datagram_33add_server_control_header(PyObject *__pyx_v_self, PyObject *__pyx_arg_msg_id); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_33add_server_control_header(PyObject *__pyx_v_self, PyObject *__pyx_arg_msg_id) {
+  unsigned short __pyx_v_msg_id;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("add_server_control_header (wrapper)", 0);
+  assert(__pyx_arg_msg_id); {
+    __pyx_v_msg_id = __Pyx_PyInt_As_unsigned_short(__pyx_arg_msg_id); if (unlikely((__pyx_v_msg_id == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 126, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("dc.util.Datagram.add_server_control_header", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_32add_server_control_header(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((unsigned short)__pyx_v_msg_id));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_2dc_4util_8Datagram_32add_server_control_header(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, unsigned short __pyx_v_msg_id) {
+  unsigned char __pyx_v_num_targets;
+  unsigned PY_LONG_LONG __pyx_v_channel;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("add_server_control_header", 0);
+
+  /* "dc/util.pyx":127
+ * 
+ *     def add_server_control_header(self, unsigned short msg_id):
+ *         cdef unsigned char num_targets = 1             # <<<<<<<<<<<<<<
+ *         cdef unsigned long long channel = CONTROL_MESSAGE
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ */
+  __pyx_v_num_targets = 1;
+
+  /* "dc/util.pyx":128
+ *     def add_server_control_header(self, unsigned short msg_id):
+ *         cdef unsigned char num_targets = 1
+ *         cdef unsigned long long channel = CONTROL_MESSAGE             # <<<<<<<<<<<<<<
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ *         self.append_data(&channel, sizeof(channel))
+ */
+  __pyx_v_channel = __pyx_v_2dc_4util_CONTROL_MESSAGE;
+
+  /* "dc/util.pyx":129
+ *         cdef unsigned char num_targets = 1
+ *         cdef unsigned long long channel = CONTROL_MESSAGE
+ *         self.append_data(&num_targets, sizeof(num_targets))             # <<<<<<<<<<<<<<
+ *         self.append_data(&channel, sizeof(channel))
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ */
+  __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_num_targets), (sizeof(__pyx_v_num_targets)));
+
+  /* "dc/util.pyx":130
+ *         cdef unsigned long long channel = CONTROL_MESSAGE
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ *         self.append_data(&channel, sizeof(channel))             # <<<<<<<<<<<<<<
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ * 
+ */
+  __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_channel), (sizeof(__pyx_v_channel)));
+
+  /* "dc/util.pyx":131
+ *         self.append_data(&num_targets, sizeof(num_targets))
+ *         self.append_data(&channel, sizeof(channel))
+ *         self.append_data(&msg_id, sizeof(msg_id))             # <<<<<<<<<<<<<<
+ * 
+ *     def add_datagram(self, Datagram dg):
+ */
+  __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&__pyx_v_msg_id), (sizeof(__pyx_v_msg_id)));
+
+  /* "dc/util.pyx":126
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ * 
+ *     def add_server_control_header(self, unsigned short msg_id):             # <<<<<<<<<<<<<<
+ *         cdef unsigned char num_targets = 1
+ *         cdef unsigned long long channel = CONTROL_MESSAGE
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "dc/util.pyx":133
+ *         self.append_data(&msg_id, sizeof(msg_id))
+ * 
+ *     def add_datagram(self, Datagram dg):             # <<<<<<<<<<<<<<
+ *         self.append_data(&dg.buffer[0], dg.length)
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_2dc_4util_8Datagram_35add_datagram(PyObject *__pyx_v_self, PyObject *__pyx_v_dg); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_35add_datagram(PyObject *__pyx_v_self, PyObject *__pyx_v_dg) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("add_datagram (wrapper)", 0);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dg), __pyx_ptype_2dc_4util_Datagram, 1, "dg", 0))) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_34add_datagram(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_dg));
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_2dc_4util_8Datagram_34add_datagram(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, struct __pyx_obj_2dc_4util_Datagram *__pyx_v_dg) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_datagram", 0);
 
-  /* "dc/util.pyx":113
+  /* "dc/util.pyx":134
  * 
  *     def add_datagram(self, Datagram dg):
  *         self.append_data(&dg.buffer[0], dg.length)             # <<<<<<<<<<<<<<
@@ -4198,8 +4478,8 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_datagram(struct __pyx_obj_2d
  */
   __pyx_f_2dc_4util_8Datagram_append_data(__pyx_v_self, (&(__pyx_v_dg->buffer[0])), __pyx_v_dg->length);
 
-  /* "dc/util.pyx":112
- *             raise MemoryError('could not allocate memory for datagram')
+  /* "dc/util.pyx":133
+ *         self.append_data(&msg_id, sizeof(msg_id))
  * 
  *     def add_datagram(self, Datagram dg):             # <<<<<<<<<<<<<<
  *         self.append_data(&dg.buffer[0], dg.length)
@@ -4213,7 +4493,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_datagram(struct __pyx_obj_2d
   return __pyx_r;
 }
 
-/* "dc/util.pyx":115
+/* "dc/util.pyx":136
  *         self.append_data(&dg.buffer[0], dg.length)
  * 
  *     def get_message(self):             # <<<<<<<<<<<<<<
@@ -4222,19 +4502,19 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_30add_datagram(struct __pyx_obj_2d
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_33get_message(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_33get_message(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_37get_message(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_37get_message(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_message (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_32get_message(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_36get_message(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_36get_message(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   __Pyx_memviewslice __pyx_v_memview = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_v_output = NULL;
   PyObject *__pyx_r = NULL;
@@ -4248,7 +4528,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("get_message", 0);
 
-  /* "dc/util.pyx":116
+  /* "dc/util.pyx":137
  * 
  *     def get_message(self):
  *         cdef unsigned char[::1] memview = <unsigned char[:self.length:1]>self.buffer             # <<<<<<<<<<<<<<
@@ -4258,37 +4538,37 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc
   __pyx_t_1 = __pyx_v_self->buffer;
   if (!__pyx_t_1) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(0, 116, __pyx_L1_error)
+    __PYX_ERR(0, 137, __pyx_L1_error)
   }
   __pyx_t_4 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_unsigned_char);
   __pyx_t_3 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)__pyx_v_self->length));
-  if (unlikely(!__pyx_t_4 || !__pyx_t_3 || !PyBytes_AsString(__pyx_t_4))) __PYX_ERR(0, 116, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4 || !__pyx_t_3 || !PyBytes_AsString(__pyx_t_4))) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_array_new(__pyx_t_3, sizeof(unsigned char), PyBytes_AS_STRING(__pyx_t_4), (char *) "fortran", (char *) __pyx_t_1);
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_unsigned_char(((PyObject *)__pyx_t_2), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_unsigned_char(((PyObject *)__pyx_t_2), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(((PyObject *)__pyx_t_2)); __pyx_t_2 = 0;
   __pyx_v_memview = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "dc/util.pyx":117
+  /* "dc/util.pyx":138
  *     def get_message(self):
  *         cdef unsigned char[::1] memview = <unsigned char[:self.length:1]>self.buffer
  *         output = np.asarray(memview)             # <<<<<<<<<<<<<<
  *         return output
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_asarray); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_asarray); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_memview, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char, (int (*)(char *, PyObject *)) __pyx_memview_set_unsigned_char, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_memview, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char, (int (*)(char *, PyObject *)) __pyx_memview_set_unsigned_char, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -4303,13 +4583,13 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc
   __pyx_t_4 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_7, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 117, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_output = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "dc/util.pyx":118
+  /* "dc/util.pyx":139
  *         cdef unsigned char[::1] memview = <unsigned char[:self.length:1]>self.buffer
  *         output = np.asarray(memview)
  *         return output             # <<<<<<<<<<<<<<
@@ -4321,7 +4601,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc
   __pyx_r = __pyx_v_output;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":115
+  /* "dc/util.pyx":136
  *         self.append_data(&dg.buffer[0], dg.length)
  * 
  *     def get_message(self):             # <<<<<<<<<<<<<<
@@ -4347,7 +4627,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc
   return __pyx_r;
 }
 
-/* "dc/util.pyx":120
+/* "dc/util.pyx":141
  *         return output
  * 
  *     def get_length(self):             # <<<<<<<<<<<<<<
@@ -4356,25 +4636,25 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_32get_message(struct __pyx_obj_2dc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_35get_length(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_35get_length(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_39get_length(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_39get_length(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_length (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_34get_length(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_38get_length(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_34get_length(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_38get_length(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_length", 0);
 
-  /* "dc/util.pyx":121
+  /* "dc/util.pyx":142
  * 
  *     def get_length(self):
  *         return self.length             # <<<<<<<<<<<<<<
@@ -4382,13 +4662,13 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_34get_length(struct __pyx_obj_2dc_
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->length); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":120
+  /* "dc/util.pyx":141
  *         return output
  * 
  *     def get_length(self):             # <<<<<<<<<<<<<<
@@ -4407,7 +4687,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_34get_length(struct __pyx_obj_2dc_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":123
+/* "dc/util.pyx":144
  *         return self.length
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -4416,22 +4696,22 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_34get_length(struct __pyx_obj_2dc_
  */
 
 /* Python wrapper */
-static void __pyx_pw_2dc_4util_8Datagram_37__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_2dc_4util_8Datagram_37__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_2dc_4util_8Datagram_41__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_2dc_4util_8Datagram_41__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_2dc_4util_8Datagram_36__dealloc__(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_pf_2dc_4util_8Datagram_40__dealloc__(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static void __pyx_pf_2dc_4util_8Datagram_40__dealloc__(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "dc/util.pyx":124
+  /* "dc/util.pyx":145
  * 
  *     def __dealloc__(self):
  *         if self.buffer is not NULL:             # <<<<<<<<<<<<<<
@@ -4441,7 +4721,7 @@ static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4uti
   __pyx_t_1 = ((__pyx_v_self->buffer != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "dc/util.pyx":125
+    /* "dc/util.pyx":146
  *     def __dealloc__(self):
  *         if self.buffer is not NULL:
  *             free(self.buffer)             # <<<<<<<<<<<<<<
@@ -4450,7 +4730,7 @@ static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4uti
  */
     free(__pyx_v_self->buffer);
 
-    /* "dc/util.pyx":126
+    /* "dc/util.pyx":147
  *         if self.buffer is not NULL:
  *             free(self.buffer)
  *             self.buffer = NULL             # <<<<<<<<<<<<<<
@@ -4459,7 +4739,7 @@ static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4uti
  */
     __pyx_v_self->buffer = NULL;
 
-    /* "dc/util.pyx":124
+    /* "dc/util.pyx":145
  * 
  *     def __dealloc__(self):
  *         if self.buffer is not NULL:             # <<<<<<<<<<<<<<
@@ -4468,7 +4748,7 @@ static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4uti
  */
   }
 
-  /* "dc/util.pyx":123
+  /* "dc/util.pyx":144
  *         return self.length
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -4480,7 +4760,7 @@ static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4uti
   __Pyx_RefNannyFinishContext();
 }
 
-/* "dc/util.pyx":128
+/* "dc/util.pyx":149
  *             self.buffer = NULL
  * 
  *     def iterator(self):             # <<<<<<<<<<<<<<
@@ -4489,19 +4769,19 @@ static void __pyx_pf_2dc_4util_8Datagram_36__dealloc__(struct __pyx_obj_2dc_4uti
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_39iterator(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_39iterator(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_43iterator(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_43iterator(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("iterator (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_38iterator(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_42iterator(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_42iterator(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_dgi = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4509,7 +4789,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4u
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("iterator", 0);
 
-  /* "dc/util.pyx":129
+  /* "dc/util.pyx":150
  * 
  *     def iterator(self):
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4519,20 +4799,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4u
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":130
+    /* "dc/util.pyx":151
  *     def iterator(self):
  *         if self.buffer is NULL:
  *             raise MemoryError('tried to make iterator of invalid datagram')             # <<<<<<<<<<<<<<
  *         cdef DatagramIterator dgi = DatagramIterator()
  *         dgi.set_dg(<void *>self)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 130, __pyx_L1_error)
+    __PYX_ERR(0, 151, __pyx_L1_error)
 
-    /* "dc/util.pyx":129
+    /* "dc/util.pyx":150
  * 
  *     def iterator(self):
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4541,30 +4821,30 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4u
  */
   }
 
-  /* "dc/util.pyx":131
+  /* "dc/util.pyx":152
  *         if self.buffer is NULL:
  *             raise MemoryError('tried to make iterator of invalid datagram')
  *         cdef DatagramIterator dgi = DatagramIterator()             # <<<<<<<<<<<<<<
  *         dgi.set_dg(<void *>self)
  *         return dgi
  */
-  __pyx_t_2 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_2dc_4util_DatagramIterator)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_2dc_4util_DatagramIterator)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_dgi = ((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "dc/util.pyx":132
+  /* "dc/util.pyx":153
  *             raise MemoryError('tried to make iterator of invalid datagram')
  *         cdef DatagramIterator dgi = DatagramIterator()
  *         dgi.set_dg(<void *>self)             # <<<<<<<<<<<<<<
  *         return dgi
  * 
  */
-  __pyx_t_2 = ((struct __pyx_vtabstruct_2dc_4util_DatagramIterator *)__pyx_v_dgi->__pyx_vtab)->set_dg(__pyx_v_dgi, ((void *)__pyx_v_self)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_2 = ((struct __pyx_vtabstruct_2dc_4util_DatagramIterator *)__pyx_v_dgi->__pyx_vtab)->set_dg(__pyx_v_dgi, ((void *)__pyx_v_self)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "dc/util.pyx":133
+  /* "dc/util.pyx":154
  *         cdef DatagramIterator dgi = DatagramIterator()
  *         dgi.set_dg(<void *>self)
  *         return dgi             # <<<<<<<<<<<<<<
@@ -4576,7 +4856,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4u
   __pyx_r = ((PyObject *)__pyx_v_dgi);
   goto __pyx_L0;
 
-  /* "dc/util.pyx":128
+  /* "dc/util.pyx":149
  *             self.buffer = NULL
  * 
  *     def iterator(self):             # <<<<<<<<<<<<<<
@@ -4596,7 +4876,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4u
   return __pyx_r;
 }
 
-/* "dc/util.pyx":135
+/* "dc/util.pyx":156
  *         return dgi
  * 
  *     def copy(self):             # <<<<<<<<<<<<<<
@@ -4605,19 +4885,19 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_38iterator(struct __pyx_obj_2dc_4u
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_41copy(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_41copy(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_45copy(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_45copy(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("copy (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_40copy(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_44copy(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_44copy(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   struct __pyx_obj_2dc_4util_Datagram *__pyx_v_copy_dg = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4626,7 +4906,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
   unsigned int __pyx_t_3;
   __Pyx_RefNannySetupContext("copy", 0);
 
-  /* "dc/util.pyx":136
+  /* "dc/util.pyx":157
  * 
  *     def copy(self):
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4636,20 +4916,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
   __pyx_t_1 = ((__pyx_v_self->buffer == NULL) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":137
+    /* "dc/util.pyx":158
  *     def copy(self):
  *         if self.buffer is NULL:
  *             raise MemoryError('tried to make copy of invalid datagram')             # <<<<<<<<<<<<<<
  *         cdef Datagram copy_dg = Datagram()
  *         copy_dg.check_resize(self.length)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 137, __pyx_L1_error)
+    __PYX_ERR(0, 158, __pyx_L1_error)
 
-    /* "dc/util.pyx":136
+    /* "dc/util.pyx":157
  * 
  *     def copy(self):
  *         if self.buffer is NULL:             # <<<<<<<<<<<<<<
@@ -4658,19 +4938,19 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
  */
   }
 
-  /* "dc/util.pyx":138
+  /* "dc/util.pyx":159
  *         if self.buffer is NULL:
  *             raise MemoryError('tried to make copy of invalid datagram')
  *         cdef Datagram copy_dg = Datagram()             # <<<<<<<<<<<<<<
  *         copy_dg.check_resize(self.length)
  *         memcpy(&copy_dg.buffer[0], &self.buffer[0], self.length)
  */
-  __pyx_t_2 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_2dc_4util_Datagram)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_2dc_4util_Datagram)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_copy_dg = ((struct __pyx_obj_2dc_4util_Datagram *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "dc/util.pyx":139
+  /* "dc/util.pyx":160
  *             raise MemoryError('tried to make copy of invalid datagram')
  *         cdef Datagram copy_dg = Datagram()
  *         copy_dg.check_resize(self.length)             # <<<<<<<<<<<<<<
@@ -4679,7 +4959,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
  */
   ((struct __pyx_vtabstruct_2dc_4util_Datagram *)__pyx_v_copy_dg->__pyx_vtab)->check_resize(__pyx_v_copy_dg, __pyx_v_self->length);
 
-  /* "dc/util.pyx":140
+  /* "dc/util.pyx":161
  *         cdef Datagram copy_dg = Datagram()
  *         copy_dg.check_resize(self.length)
  *         memcpy(&copy_dg.buffer[0], &self.buffer[0], self.length)             # <<<<<<<<<<<<<<
@@ -4688,7 +4968,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
  */
   (void)(memcpy((&(__pyx_v_copy_dg->buffer[0])), (&(__pyx_v_self->buffer[0])), __pyx_v_self->length));
 
-  /* "dc/util.pyx":141
+  /* "dc/util.pyx":162
  *         copy_dg.check_resize(self.length)
  *         memcpy(&copy_dg.buffer[0], &self.buffer[0], self.length)
  *         copy_dg.length = self.length             # <<<<<<<<<<<<<<
@@ -4698,7 +4978,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
   __pyx_t_3 = __pyx_v_self->length;
   __pyx_v_copy_dg->length = __pyx_t_3;
 
-  /* "dc/util.pyx":142
+  /* "dc/util.pyx":163
  *         memcpy(&copy_dg.buffer[0], &self.buffer[0], self.length)
  *         copy_dg.length = self.length
  *         return copy_dg             # <<<<<<<<<<<<<<
@@ -4710,7 +4990,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
   __pyx_r = ((PyObject *)__pyx_v_copy_dg);
   goto __pyx_L0;
 
-  /* "dc/util.pyx":135
+  /* "dc/util.pyx":156
  *         return dgi
  * 
  *     def copy(self):             # <<<<<<<<<<<<<<
@@ -4730,7 +5010,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":144
+/* "dc/util.pyx":165
  *         return copy_dg
  * 
  *     def seek(self, unsigned int n):             # <<<<<<<<<<<<<<
@@ -4739,14 +5019,14 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_40copy(struct __pyx_obj_2dc_4util_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_43seek(PyObject *__pyx_v_self, PyObject *__pyx_arg_n); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_43seek(PyObject *__pyx_v_self, PyObject *__pyx_arg_n) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_47seek(PyObject *__pyx_v_self, PyObject *__pyx_arg_n); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_47seek(PyObject *__pyx_v_self, PyObject *__pyx_arg_n) {
   unsigned int __pyx_v_n;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("seek (wrapper)", 0);
   assert(__pyx_arg_n); {
-    __pyx_v_n = __Pyx_PyInt_As_unsigned_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 144, __pyx_L3_error)
+    __pyx_v_n = __Pyx_PyInt_As_unsigned_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4754,14 +5034,14 @@ static PyObject *__pyx_pw_2dc_4util_8Datagram_43seek(PyObject *__pyx_v_self, PyO
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_42seek(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((unsigned int)__pyx_v_n));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_46seek(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((unsigned int)__pyx_v_n));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, unsigned int __pyx_v_n) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_46seek(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, unsigned int __pyx_v_n) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -4769,7 +5049,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("seek", 0);
 
-  /* "dc/util.pyx":145
+  /* "dc/util.pyx":166
  * 
  *     def seek(self, unsigned int n):
  *         if n < 0 or n > self.length:             # <<<<<<<<<<<<<<
@@ -4787,20 +5067,20 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_
   __pyx_L4_bool_binop_done:;
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":146
+    /* "dc/util.pyx":167
  *     def seek(self, unsigned int n):
  *         if n < 0 or n > self.length:
  *             raise OverflowError('invalid pos in Datagram')             # <<<<<<<<<<<<<<
  *         self.offset = n
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 146, __pyx_L1_error)
+    __PYX_ERR(0, 167, __pyx_L1_error)
 
-    /* "dc/util.pyx":145
+    /* "dc/util.pyx":166
  * 
  *     def seek(self, unsigned int n):
  *         if n < 0 or n > self.length:             # <<<<<<<<<<<<<<
@@ -4809,7 +5089,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_
  */
   }
 
-  /* "dc/util.pyx":147
+  /* "dc/util.pyx":168
  *         if n < 0 or n > self.length:
  *             raise OverflowError('invalid pos in Datagram')
  *         self.offset = n             # <<<<<<<<<<<<<<
@@ -4818,7 +5098,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_
  */
   __pyx_v_self->offset = __pyx_v_n;
 
-  /* "dc/util.pyx":144
+  /* "dc/util.pyx":165
  *         return copy_dg
  * 
  *     def seek(self, unsigned int n):             # <<<<<<<<<<<<<<
@@ -4839,7 +5119,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":149
+/* "dc/util.pyx":170
  *         self.offset = n
  * 
  *     def tell(self):             # <<<<<<<<<<<<<<
@@ -4848,25 +5128,25 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_42seek(struct __pyx_obj_2dc_4util_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_45tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_45tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_49tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_49tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tell (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_44tell(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_48tell(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_44tell(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_48tell(struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("tell", 0);
 
-  /* "dc/util.pyx":150
+  /* "dc/util.pyx":171
  * 
  *     def tell(self):
  *         return self.offset             # <<<<<<<<<<<<<<
@@ -4874,13 +5154,13 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_44tell(struct __pyx_obj_2dc_4util_
  * cdef class DatagramIterator:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":149
+  /* "dc/util.pyx":170
  *         self.offset = n
  * 
  *     def tell(self):             # <<<<<<<<<<<<<<
@@ -4906,19 +5186,19 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_44tell(struct __pyx_obj_2dc_4util_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_47__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_47__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_51__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_51__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_46__reduce_cython__(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_50__reduce_cython__(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_46__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_50__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4960,19 +5240,19 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_46__reduce_cython__(CYTHON_UNUSED 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_8Datagram_49__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_8Datagram_49__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_2dc_4util_8Datagram_53__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_8Datagram_53__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_8Datagram_48__setstate_cython__(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_2dc_4util_8Datagram_52__setstate_cython__(((struct __pyx_obj_2dc_4util_Datagram *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_8Datagram_48__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_2dc_4util_8Datagram_52__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_Datagram *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5006,7 +5286,7 @@ static PyObject *__pyx_pf_2dc_4util_8Datagram_48__setstate_cython__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "dc/util.pyx":156
+/* "dc/util.pyx":177
  *     cdef unsigned int offset
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -5035,7 +5315,7 @@ static int __pyx_pf_2dc_4util_16DatagramIterator___cinit__(struct __pyx_obj_2dc_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "dc/util.pyx":157
+  /* "dc/util.pyx":178
  * 
  *     def __cinit__(self):
  *         self.offset = 0             # <<<<<<<<<<<<<<
@@ -5044,7 +5324,7 @@ static int __pyx_pf_2dc_4util_16DatagramIterator___cinit__(struct __pyx_obj_2dc_
  */
   __pyx_v_self->offset = 0;
 
-  /* "dc/util.pyx":156
+  /* "dc/util.pyx":177
  *     cdef unsigned int offset
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -5058,7 +5338,7 @@ static int __pyx_pf_2dc_4util_16DatagramIterator___cinit__(struct __pyx_obj_2dc_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":159
+/* "dc/util.pyx":180
  *         self.offset = 0
  * 
  *     cdef set_dg(self, void* ptr):             # <<<<<<<<<<<<<<
@@ -5072,7 +5352,7 @@ static PyObject *__pyx_f_2dc_4util_16DatagramIterator_set_dg(struct __pyx_obj_2d
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("set_dg", 0);
 
-  /* "dc/util.pyx":160
+  /* "dc/util.pyx":181
  * 
  *     cdef set_dg(self, void* ptr):
  *         self.dg = <Datagram> ptr             # <<<<<<<<<<<<<<
@@ -5087,7 +5367,7 @@ static PyObject *__pyx_f_2dc_4util_16DatagramIterator_set_dg(struct __pyx_obj_2d
   __pyx_v_self->dg = ((struct __pyx_obj_2dc_4util_Datagram *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "dc/util.pyx":159
+  /* "dc/util.pyx":180
  *         self.offset = 0
  * 
  *     cdef set_dg(self, void* ptr):             # <<<<<<<<<<<<<<
@@ -5102,7 +5382,7 @@ static PyObject *__pyx_f_2dc_4util_16DatagramIterator_set_dg(struct __pyx_obj_2d
   return __pyx_r;
 }
 
-/* "dc/util.pyx":162
+/* "dc/util.pyx":183
  *         self.dg = <Datagram> ptr
  * 
  *     cdef inline void get_data(self, void* value, const unsigned short num_bytes):             # <<<<<<<<<<<<<<
@@ -5116,7 +5396,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_16DatagramIterator_get_data(struct _
   unsigned char *__pyx_t_1;
   __Pyx_RefNannySetupContext("get_data", 0);
 
-  /* "dc/util.pyx":163
+  /* "dc/util.pyx":184
  * 
  *     cdef inline void get_data(self, void* value, const unsigned short num_bytes):
  *         cdef const unsigned char* buffer = self.dg.buffer             # <<<<<<<<<<<<<<
@@ -5126,7 +5406,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_16DatagramIterator_get_data(struct _
   __pyx_t_1 = __pyx_v_self->dg->buffer;
   __pyx_v_buffer = __pyx_t_1;
 
-  /* "dc/util.pyx":164
+  /* "dc/util.pyx":185
  *     cdef inline void get_data(self, void* value, const unsigned short num_bytes):
  *         cdef const unsigned char* buffer = self.dg.buffer
  *         memcpy(value, &buffer[self.offset], num_bytes)             # <<<<<<<<<<<<<<
@@ -5135,7 +5415,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_16DatagramIterator_get_data(struct _
  */
   (void)(memcpy(__pyx_v_value, (&(__pyx_v_buffer[__pyx_v_self->offset])), __pyx_v_num_bytes));
 
-  /* "dc/util.pyx":165
+  /* "dc/util.pyx":186
  *         cdef const unsigned char* buffer = self.dg.buffer
  *         memcpy(value, &buffer[self.offset], num_bytes)
  *         self.offset += num_bytes             # <<<<<<<<<<<<<<
@@ -5144,7 +5424,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_16DatagramIterator_get_data(struct _
  */
   __pyx_v_self->offset = (__pyx_v_self->offset + __pyx_v_num_bytes);
 
-  /* "dc/util.pyx":162
+  /* "dc/util.pyx":183
  *         self.dg = <Datagram> ptr
  * 
  *     cdef inline void get_data(self, void* value, const unsigned short num_bytes):             # <<<<<<<<<<<<<<
@@ -5156,7 +5436,7 @@ static CYTHON_INLINE void __pyx_f_2dc_4util_16DatagramIterator_get_data(struct _
   __Pyx_RefNannyFinishContext();
 }
 
-/* "dc/util.pyx":167
+/* "dc/util.pyx":188
  *         self.offset += num_bytes
  * 
  *     def get_int8(self):             # <<<<<<<<<<<<<<
@@ -5185,7 +5465,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_ob
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_int8", 0);
 
-  /* "dc/util.pyx":168
+  /* "dc/util.pyx":189
  * 
  *     def get_int8(self):
  *         if self.offset + sizeof(char) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5195,20 +5475,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_ob
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(char))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":169
+    /* "dc/util.pyx":190
  *     def get_int8(self):
  *         if self.offset + sizeof(char) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  * 
  *         cdef char value
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 169, __pyx_L1_error)
+    __PYX_ERR(0, 190, __pyx_L1_error)
 
-    /* "dc/util.pyx":168
+    /* "dc/util.pyx":189
  * 
  *     def get_int8(self):
  *         if self.offset + sizeof(char) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5217,7 +5497,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_ob
  */
   }
 
-  /* "dc/util.pyx":172
+  /* "dc/util.pyx":193
  * 
  *         cdef char value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -5226,7 +5506,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_ob
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":173
+  /* "dc/util.pyx":194
  *         cdef char value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -5234,13 +5514,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_ob
  *     def get_uint8(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_char(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_char(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":167
+  /* "dc/util.pyx":188
  *         self.offset += num_bytes
  * 
  *     def get_int8(self):             # <<<<<<<<<<<<<<
@@ -5259,7 +5539,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_2get_int8(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "dc/util.pyx":175
+/* "dc/util.pyx":196
  *         return value
  * 
  *     def get_uint8(self):             # <<<<<<<<<<<<<<
@@ -5288,7 +5568,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_o
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_uint8", 0);
 
-  /* "dc/util.pyx":176
+  /* "dc/util.pyx":197
  * 
  *     def get_uint8(self):
  *         if self.offset + sizeof(unsigned char) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5298,20 +5578,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_o
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(unsigned char))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":177
+    /* "dc/util.pyx":198
  *     def get_uint8(self):
  *         if self.offset + sizeof(unsigned char) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef unsigned char value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 177, __pyx_L1_error)
+    __PYX_ERR(0, 198, __pyx_L1_error)
 
-    /* "dc/util.pyx":176
+    /* "dc/util.pyx":197
  * 
  *     def get_uint8(self):
  *         if self.offset + sizeof(unsigned char) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5320,7 +5600,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_o
  */
   }
 
-  /* "dc/util.pyx":179
+  /* "dc/util.pyx":200
  *             raise OverflowError('tried reading past datagram')
  *         cdef unsigned char value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -5329,7 +5609,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_o
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":180
+  /* "dc/util.pyx":201
  *         cdef unsigned char value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -5337,13 +5617,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_o
  *     def get_int16(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_unsigned_char(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_char(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 201, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":175
+  /* "dc/util.pyx":196
  *         return value
  * 
  *     def get_uint8(self):             # <<<<<<<<<<<<<<
@@ -5362,7 +5642,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_4get_uint8(struct __pyx_o
   return __pyx_r;
 }
 
-/* "dc/util.pyx":182
+/* "dc/util.pyx":203
  *         return value
  * 
  *     def get_int16(self):             # <<<<<<<<<<<<<<
@@ -5391,7 +5671,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_6get_int16(struct __pyx_o
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_int16", 0);
 
-  /* "dc/util.pyx":183
+  /* "dc/util.pyx":204
  * 
  *     def get_int16(self):
  *         if self.offset + sizeof(short) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5401,20 +5681,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_6get_int16(struct __pyx_o
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(short))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":184
+    /* "dc/util.pyx":205
  *     def get_int16(self):
  *         if self.offset + sizeof(short) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef short value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 184, __pyx_L1_error)
+    __PYX_ERR(0, 205, __pyx_L1_error)
 
-    /* "dc/util.pyx":183
+    /* "dc/util.pyx":204
  * 
  *     def get_int16(self):
  *         if self.offset + sizeof(short) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5423,7 +5703,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_6get_int16(struct __pyx_o
  */
   }
 
-  /* "dc/util.pyx":186
+  /* "dc/util.pyx":207
  *             raise OverflowError('tried reading past datagram')
  *         cdef short value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -5432,7 +5712,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_6get_int16(struct __pyx_o
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":187
+  /* "dc/util.pyx":208
  *         cdef short value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -5440,13 +5720,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_6get_int16(struct __pyx_o
  *     def get_uint16(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_short(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_short(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":182
+  /* "dc/util.pyx":203
  *         return value
  * 
  *     def get_int16(self):             # <<<<<<<<<<<<<<
@@ -5465,7 +5745,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_6get_int16(struct __pyx_o
   return __pyx_r;
 }
 
-/* "dc/util.pyx":189
+/* "dc/util.pyx":210
  *         return value
  * 
  *     def get_uint16(self):             # <<<<<<<<<<<<<<
@@ -5494,7 +5774,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_8get_uint16(struct __pyx_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_uint16", 0);
 
-  /* "dc/util.pyx":190
+  /* "dc/util.pyx":211
  * 
  *     def get_uint16(self):
  *         if self.offset + sizeof(unsigned short) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5504,20 +5784,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_8get_uint16(struct __pyx_
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(unsigned short))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":191
+    /* "dc/util.pyx":212
  *     def get_uint16(self):
  *         if self.offset + sizeof(unsigned short) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef unsigned short value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 191, __pyx_L1_error)
+    __PYX_ERR(0, 212, __pyx_L1_error)
 
-    /* "dc/util.pyx":190
+    /* "dc/util.pyx":211
  * 
  *     def get_uint16(self):
  *         if self.offset + sizeof(unsigned short) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5526,7 +5806,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_8get_uint16(struct __pyx_
  */
   }
 
-  /* "dc/util.pyx":193
+  /* "dc/util.pyx":214
  *             raise OverflowError('tried reading past datagram')
  *         cdef unsigned short value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -5535,7 +5815,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_8get_uint16(struct __pyx_
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":194
+  /* "dc/util.pyx":215
  *         cdef unsigned short value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -5543,13 +5823,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_8get_uint16(struct __pyx_
  *     def get_int32(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_unsigned_short(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_short(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":189
+  /* "dc/util.pyx":210
  *         return value
  * 
  *     def get_uint16(self):             # <<<<<<<<<<<<<<
@@ -5568,7 +5848,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_8get_uint16(struct __pyx_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":196
+/* "dc/util.pyx":217
  *         return value
  * 
  *     def get_int32(self):             # <<<<<<<<<<<<<<
@@ -5597,7 +5877,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_10get_int32(struct __pyx_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_int32", 0);
 
-  /* "dc/util.pyx":197
+  /* "dc/util.pyx":218
  * 
  *     def get_int32(self):
  *         if self.offset + sizeof(int) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5607,20 +5887,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_10get_int32(struct __pyx_
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(int))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":198
+    /* "dc/util.pyx":219
  *     def get_int32(self):
  *         if self.offset + sizeof(int) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef int value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 198, __pyx_L1_error)
+    __PYX_ERR(0, 219, __pyx_L1_error)
 
-    /* "dc/util.pyx":197
+    /* "dc/util.pyx":218
  * 
  *     def get_int32(self):
  *         if self.offset + sizeof(int) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5629,7 +5909,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_10get_int32(struct __pyx_
  */
   }
 
-  /* "dc/util.pyx":200
+  /* "dc/util.pyx":221
  *             raise OverflowError('tried reading past datagram')
  *         cdef int value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -5638,7 +5918,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_10get_int32(struct __pyx_
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":201
+  /* "dc/util.pyx":222
  *         cdef int value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -5646,13 +5926,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_10get_int32(struct __pyx_
  *     def get_uint32(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":196
+  /* "dc/util.pyx":217
  *         return value
  * 
  *     def get_int32(self):             # <<<<<<<<<<<<<<
@@ -5671,7 +5951,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_10get_int32(struct __pyx_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":203
+/* "dc/util.pyx":224
  *         return value
  * 
  *     def get_uint32(self):             # <<<<<<<<<<<<<<
@@ -5700,7 +5980,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_12get_uint32(struct __pyx
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_uint32", 0);
 
-  /* "dc/util.pyx":204
+  /* "dc/util.pyx":225
  * 
  *     def get_uint32(self):
  *         if self.offset + sizeof(unsigned int) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5710,20 +5990,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_12get_uint32(struct __pyx
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(unsigned int))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":205
+    /* "dc/util.pyx":226
  *     def get_uint32(self):
  *         if self.offset + sizeof(unsigned int) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef unsigned int value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 205, __pyx_L1_error)
+    __PYX_ERR(0, 226, __pyx_L1_error)
 
-    /* "dc/util.pyx":204
+    /* "dc/util.pyx":225
  * 
  *     def get_uint32(self):
  *         if self.offset + sizeof(unsigned int) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -5732,7 +6012,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_12get_uint32(struct __pyx
  */
   }
 
-  /* "dc/util.pyx":207
+  /* "dc/util.pyx":228
  *             raise OverflowError('tried reading past datagram')
  *         cdef unsigned int value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -5741,7 +6021,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_12get_uint32(struct __pyx
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":208
+  /* "dc/util.pyx":229
  *         cdef unsigned int value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -5749,13 +6029,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_12get_uint32(struct __pyx
  *     def get_int64(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_unsigned_int(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_int(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":203
+  /* "dc/util.pyx":224
  *         return value
  * 
  *     def get_uint32(self):             # <<<<<<<<<<<<<<
@@ -5774,7 +6054,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_12get_uint32(struct __pyx
   return __pyx_r;
 }
 
-/* "dc/util.pyx":210
+/* "dc/util.pyx":231
  *         return value
  * 
  *     def get_int64(self):             # <<<<<<<<<<<<<<
@@ -5796,69 +6076,69 @@ static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_15get_int64(PyObject *__p
 }
 
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_14get_int64(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
-  long __pyx_v_value;
+  PY_LONG_LONG __pyx_v_value;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_int64", 0);
 
-  /* "dc/util.pyx":211
+  /* "dc/util.pyx":232
  * 
  *     def get_int64(self):
  *         if self.offset + sizeof(long long) > self.dg.length:             # <<<<<<<<<<<<<<
  *             raise OverflowError('tried reading past datagram')
- *         cdef long value
+ *         cdef long long value
  */
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(PY_LONG_LONG))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":212
+    /* "dc/util.pyx":233
  *     def get_int64(self):
  *         if self.offset + sizeof(long long) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
- *         cdef long value
+ *         cdef long long value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 212, __pyx_L1_error)
+    __PYX_ERR(0, 233, __pyx_L1_error)
 
-    /* "dc/util.pyx":211
+    /* "dc/util.pyx":232
  * 
  *     def get_int64(self):
  *         if self.offset + sizeof(long long) > self.dg.length:             # <<<<<<<<<<<<<<
  *             raise OverflowError('tried reading past datagram')
- *         cdef long value
+ *         cdef long long value
  */
   }
 
-  /* "dc/util.pyx":214
+  /* "dc/util.pyx":235
  *             raise OverflowError('tried reading past datagram')
- *         cdef long value
+ *         cdef long long value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
  *         return value
  * 
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":215
- *         cdef long value
+  /* "dc/util.pyx":236
+ *         cdef long long value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
  * 
  *     def get_uint64(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":210
+  /* "dc/util.pyx":231
  *         return value
  * 
  *     def get_int64(self):             # <<<<<<<<<<<<<<
@@ -5877,7 +6157,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_14get_int64(struct __pyx_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":217
+/* "dc/util.pyx":238
  *         return value
  * 
  *     def get_uint64(self):             # <<<<<<<<<<<<<<
@@ -5899,69 +6179,69 @@ static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_17get_uint64(PyObject *__
 }
 
 static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_16get_uint64(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
-  unsigned long __pyx_v_value;
+  unsigned PY_LONG_LONG __pyx_v_value;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_uint64", 0);
 
-  /* "dc/util.pyx":218
+  /* "dc/util.pyx":239
  * 
  *     def get_uint64(self):
  *         if self.offset + sizeof(unsigned long long) > self.dg.length:             # <<<<<<<<<<<<<<
  *             raise OverflowError('tried reading past datagram')
- *         cdef unsigned long value
+ *         cdef unsigned long long value
  */
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(unsigned PY_LONG_LONG))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":219
+    /* "dc/util.pyx":240
  *     def get_uint64(self):
  *         if self.offset + sizeof(unsigned long long) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
- *         cdef unsigned long value
+ *         cdef unsigned long long value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 219, __pyx_L1_error)
+    __PYX_ERR(0, 240, __pyx_L1_error)
 
-    /* "dc/util.pyx":218
+    /* "dc/util.pyx":239
  * 
  *     def get_uint64(self):
  *         if self.offset + sizeof(unsigned long long) > self.dg.length:             # <<<<<<<<<<<<<<
  *             raise OverflowError('tried reading past datagram')
- *         cdef unsigned long value
+ *         cdef unsigned long long value
  */
   }
 
-  /* "dc/util.pyx":221
+  /* "dc/util.pyx":242
  *             raise OverflowError('tried reading past datagram')
- *         cdef unsigned long value
+ *         cdef unsigned long long value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
  *         return value
  * 
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":222
- *         cdef unsigned long value
+  /* "dc/util.pyx":243
+ *         cdef unsigned long long value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
  * 
  *     def get_float32(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_unsigned_long(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_PY_LONG_LONG(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":217
+  /* "dc/util.pyx":238
  *         return value
  * 
  *     def get_uint64(self):             # <<<<<<<<<<<<<<
@@ -5980,7 +6260,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_16get_uint64(struct __pyx
   return __pyx_r;
 }
 
-/* "dc/util.pyx":224
+/* "dc/util.pyx":245
  *         return value
  * 
  *     def get_float32(self):             # <<<<<<<<<<<<<<
@@ -6009,7 +6289,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_18get_float32(struct __py
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_float32", 0);
 
-  /* "dc/util.pyx":225
+  /* "dc/util.pyx":246
  * 
  *     def get_float32(self):
  *         if self.offset + sizeof(float) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6019,20 +6299,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_18get_float32(struct __py
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(float))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":226
+    /* "dc/util.pyx":247
  *     def get_float32(self):
  *         if self.offset + sizeof(float) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef float value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 247, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 226, __pyx_L1_error)
+    __PYX_ERR(0, 247, __pyx_L1_error)
 
-    /* "dc/util.pyx":225
+    /* "dc/util.pyx":246
  * 
  *     def get_float32(self):
  *         if self.offset + sizeof(float) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6041,7 +6321,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_18get_float32(struct __py
  */
   }
 
-  /* "dc/util.pyx":228
+  /* "dc/util.pyx":249
  *             raise OverflowError('tried reading past datagram')
  *         cdef float value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -6050,7 +6330,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_18get_float32(struct __py
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":229
+  /* "dc/util.pyx":250
  *         cdef float value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -6058,13 +6338,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_18get_float32(struct __py
  *     def get_float64(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":224
+  /* "dc/util.pyx":245
  *         return value
  * 
  *     def get_float32(self):             # <<<<<<<<<<<<<<
@@ -6083,7 +6363,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_18get_float32(struct __py
   return __pyx_r;
 }
 
-/* "dc/util.pyx":231
+/* "dc/util.pyx":252
  *         return value
  * 
  *     def get_float64(self):             # <<<<<<<<<<<<<<
@@ -6112,7 +6392,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_20get_float64(struct __py
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_float64", 0);
 
-  /* "dc/util.pyx":232
+  /* "dc/util.pyx":253
  * 
  *     def get_float64(self):
  *         if self.offset + sizeof(double) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6122,20 +6402,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_20get_float64(struct __py
   __pyx_t_1 = (((__pyx_v_self->offset + (sizeof(double))) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":233
+    /* "dc/util.pyx":254
  *     def get_float64(self):
  *         if self.offset + sizeof(double) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  *         cdef double value
  *         self.get_data(&value, sizeof(value))
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 233, __pyx_L1_error)
+    __PYX_ERR(0, 254, __pyx_L1_error)
 
-    /* "dc/util.pyx":232
+    /* "dc/util.pyx":253
  * 
  *     def get_float64(self):
  *         if self.offset + sizeof(double) > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6144,7 +6424,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_20get_float64(struct __py
  */
   }
 
-  /* "dc/util.pyx":235
+  /* "dc/util.pyx":256
  *             raise OverflowError('tried reading past datagram')
  *         cdef double value
  *         self.get_data(&value, sizeof(value))             # <<<<<<<<<<<<<<
@@ -6153,7 +6433,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_20get_float64(struct __py
  */
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, (&__pyx_v_value), (sizeof(__pyx_v_value)));
 
-  /* "dc/util.pyx":236
+  /* "dc/util.pyx":257
  *         cdef double value
  *         self.get_data(&value, sizeof(value))
  *         return value             # <<<<<<<<<<<<<<
@@ -6161,13 +6441,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_20get_float64(struct __py
  *     def get_bytes(self, unsigned int num_bytes):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":231
+  /* "dc/util.pyx":252
  *         return value
  * 
  *     def get_float64(self):             # <<<<<<<<<<<<<<
@@ -6186,7 +6466,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_20get_float64(struct __py
   return __pyx_r;
 }
 
-/* "dc/util.pyx":238
+/* "dc/util.pyx":259
  *         return value
  * 
  *     def get_bytes(self, unsigned int num_bytes):             # <<<<<<<<<<<<<<
@@ -6202,7 +6482,7 @@ static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_23get_bytes(PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_bytes (wrapper)", 0);
   assert(__pyx_arg_num_bytes); {
-    __pyx_v_num_bytes = __Pyx_PyInt_As_unsigned_int(__pyx_arg_num_bytes); if (unlikely((__pyx_v_num_bytes == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
+    __pyx_v_num_bytes = __Pyx_PyInt_As_unsigned_int(__pyx_arg_num_bytes); if (unlikely((__pyx_v_num_bytes == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 259, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6227,7 +6507,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_22get_bytes(struct __pyx_
   unsigned char *__pyx_t_4;
   __Pyx_RefNannySetupContext("get_bytes", 0);
 
-  /* "dc/util.pyx":239
+  /* "dc/util.pyx":260
  * 
  *     def get_bytes(self, unsigned int num_bytes):
  *         if self.offset + num_bytes > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6237,20 +6517,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_22get_bytes(struct __pyx_
   __pyx_t_1 = (((__pyx_v_self->offset + __pyx_v_num_bytes) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "dc/util.pyx":240
+    /* "dc/util.pyx":261
  *     def get_bytes(self, unsigned int num_bytes):
  *         if self.offset + num_bytes > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  * 
  *         cdef bytearray value = bytearray(num_bytes)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 240, __pyx_L1_error)
+    __PYX_ERR(0, 261, __pyx_L1_error)
 
-    /* "dc/util.pyx":239
+    /* "dc/util.pyx":260
  * 
  *     def get_bytes(self, unsigned int num_bytes):
  *         if self.offset + num_bytes > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6259,32 +6539,32 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_22get_bytes(struct __pyx_
  */
   }
 
-  /* "dc/util.pyx":242
+  /* "dc/util.pyx":263
  *             raise OverflowError('tried reading past datagram')
  * 
  *         cdef bytearray value = bytearray(num_bytes)             # <<<<<<<<<<<<<<
  *         self.get_data(<unsigned char *>value, num_bytes)
  * 
  */
-  __pyx_t_2 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyByteArray_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyByteArray_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_value = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "dc/util.pyx":243
+  /* "dc/util.pyx":264
  * 
  *         cdef bytearray value = bytearray(num_bytes)
  *         self.get_data(<unsigned char *>value, num_bytes)             # <<<<<<<<<<<<<<
  * 
  *         return value
  */
-  __pyx_t_4 = __Pyx_PyObject_AsWritableUString(__pyx_v_value); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 243, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_AsWritableUString(__pyx_v_value); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 264, __pyx_L1_error)
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, ((unsigned char *)__pyx_t_4), __pyx_v_num_bytes);
 
-  /* "dc/util.pyx":245
+  /* "dc/util.pyx":266
  *         self.get_data(<unsigned char *>value, num_bytes)
  * 
  *         return value             # <<<<<<<<<<<<<<
@@ -6296,7 +6576,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_22get_bytes(struct __pyx_
   __pyx_r = __pyx_v_value;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":238
+  /* "dc/util.pyx":259
  *         return value
  * 
  *     def get_bytes(self, unsigned int num_bytes):             # <<<<<<<<<<<<<<
@@ -6317,7 +6597,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_22get_bytes(struct __pyx_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":247
+/* "dc/util.pyx":268
  *         return value
  * 
  *     def get_string16(self):             # <<<<<<<<<<<<<<
@@ -6351,14 +6631,14 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_24get_string16(struct __p
   unsigned char *__pyx_t_6;
   __Pyx_RefNannySetupContext("get_string16", 0);
 
-  /* "dc/util.pyx":248
+  /* "dc/util.pyx":269
  * 
  *     def get_string16(self):
  *         cdef unsigned short num_bytes = self.get_uint16()             # <<<<<<<<<<<<<<
  * 
  *         if self.offset + num_bytes > self.dg.length:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_uint16); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_uint16); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6372,14 +6652,14 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_24get_string16(struct __p
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyInt_As_unsigned_short(__pyx_t_1); if (unlikely((__pyx_t_4 == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_As_unsigned_short(__pyx_t_1); if (unlikely((__pyx_t_4 == (unsigned short)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_num_bytes = __pyx_t_4;
 
-  /* "dc/util.pyx":250
+  /* "dc/util.pyx":271
  *         cdef unsigned short num_bytes = self.get_uint16()
  * 
  *         if self.offset + num_bytes > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6389,20 +6669,20 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_24get_string16(struct __p
   __pyx_t_5 = (((__pyx_v_self->offset + __pyx_v_num_bytes) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_5)) {
 
-    /* "dc/util.pyx":251
+    /* "dc/util.pyx":272
  * 
  *         if self.offset + num_bytes > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  * 
  *         cdef bytearray value = bytearray(num_bytes)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_OverflowError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 251, __pyx_L1_error)
+    __PYX_ERR(0, 272, __pyx_L1_error)
 
-    /* "dc/util.pyx":250
+    /* "dc/util.pyx":271
  *         cdef unsigned short num_bytes = self.get_uint16()
  * 
  *         if self.offset + num_bytes > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6411,32 +6691,32 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_24get_string16(struct __p
  */
   }
 
-  /* "dc/util.pyx":253
+  /* "dc/util.pyx":274
  *             raise OverflowError('tried reading past datagram')
  * 
  *         cdef bytearray value = bytearray(num_bytes)             # <<<<<<<<<<<<<<
  *         self.get_data(<unsigned char *>value, num_bytes)
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_short(__pyx_v_num_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_short(__pyx_v_num_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyByteArray_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyByteArray_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_value = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "dc/util.pyx":254
+  /* "dc/util.pyx":275
  * 
  *         cdef bytearray value = bytearray(num_bytes)
  *         self.get_data(<unsigned char *>value, num_bytes)             # <<<<<<<<<<<<<<
  * 
  *         return value.decode('utf-8')
  */
-  __pyx_t_6 = __Pyx_PyObject_AsWritableUString(__pyx_v_value); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_AsWritableUString(__pyx_v_value); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 275, __pyx_L1_error)
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, ((unsigned char *)__pyx_t_6), __pyx_v_num_bytes);
 
-  /* "dc/util.pyx":256
+  /* "dc/util.pyx":277
  *         self.get_data(<unsigned char *>value, num_bytes)
  * 
  *         return value.decode('utf-8')             # <<<<<<<<<<<<<<
@@ -6444,13 +6724,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_24get_string16(struct __p
  *     def get_string32(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_decode_bytearray(__pyx_v_value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_decode_bytearray(__pyx_v_value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 277, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":247
+  /* "dc/util.pyx":268
  *         return value
  * 
  *     def get_string16(self):             # <<<<<<<<<<<<<<
@@ -6472,7 +6752,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_24get_string16(struct __p
   return __pyx_r;
 }
 
-/* "dc/util.pyx":258
+/* "dc/util.pyx":279
  *         return value.decode('utf-8')
  * 
  *     def get_string32(self):             # <<<<<<<<<<<<<<
@@ -6506,14 +6786,14 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
   unsigned char *__pyx_t_6;
   __Pyx_RefNannySetupContext("get_string32", 0);
 
-  /* "dc/util.pyx":259
+  /* "dc/util.pyx":280
  * 
  *     def get_string32(self):
  *         cdef unsigned int num_bytes = self.get_uint32()             # <<<<<<<<<<<<<<
  *         if self.offset + num_bytes > self.dg.length:
  *             raise OverflowError('tried reading past datagram: string length is %d' % num_bytes)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_uint32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_uint32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6527,14 +6807,14 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 259, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_As_unsigned_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_num_bytes = __pyx_t_4;
 
-  /* "dc/util.pyx":260
+  /* "dc/util.pyx":281
  *     def get_string32(self):
  *         cdef unsigned int num_bytes = self.get_uint32()
  *         if self.offset + num_bytes > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6544,26 +6824,26 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
   __pyx_t_5 = (((__pyx_v_self->offset + __pyx_v_num_bytes) > __pyx_v_self->dg->length) != 0);
   if (unlikely(__pyx_t_5)) {
 
-    /* "dc/util.pyx":261
+    /* "dc/util.pyx":282
  *         cdef unsigned int num_bytes = self.get_uint32()
  *         if self.offset + num_bytes > self.dg.length:
  *             raise OverflowError('tried reading past datagram: string length is %d' % num_bytes)             # <<<<<<<<<<<<<<
  * 
  *         cdef bytearray value = bytearray(num_bytes)
  */
-    __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_tried_reading_past_datagram_stri, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_tried_reading_past_datagram_stri, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_OverflowError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_OverflowError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 261, __pyx_L1_error)
+    __PYX_ERR(0, 282, __pyx_L1_error)
 
-    /* "dc/util.pyx":260
+    /* "dc/util.pyx":281
  *     def get_string32(self):
  *         cdef unsigned int num_bytes = self.get_uint32()
  *         if self.offset + num_bytes > self.dg.length:             # <<<<<<<<<<<<<<
@@ -6572,32 +6852,32 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
  */
   }
 
-  /* "dc/util.pyx":263
+  /* "dc/util.pyx":284
  *             raise OverflowError('tried reading past datagram: string length is %d' % num_bytes)
  * 
  *         cdef bytearray value = bytearray(num_bytes)             # <<<<<<<<<<<<<<
  *         self.get_data(<unsigned char *>value, num_bytes)
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_num_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyByteArray_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyByteArray_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 284, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_value = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "dc/util.pyx":264
+  /* "dc/util.pyx":285
  * 
  *         cdef bytearray value = bytearray(num_bytes)
  *         self.get_data(<unsigned char *>value, num_bytes)             # <<<<<<<<<<<<<<
  * 
  *         return value.decode('utf-8')
  */
-  __pyx_t_6 = __Pyx_PyObject_AsWritableUString(__pyx_v_value); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_AsWritableUString(__pyx_v_value); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 285, __pyx_L1_error)
   __pyx_f_2dc_4util_16DatagramIterator_get_data(__pyx_v_self, ((unsigned char *)__pyx_t_6), __pyx_v_num_bytes);
 
-  /* "dc/util.pyx":266
+  /* "dc/util.pyx":287
  *         self.get_data(<unsigned char *>value, num_bytes)
  * 
  *         return value.decode('utf-8')             # <<<<<<<<<<<<<<
@@ -6605,13 +6885,13 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
  *     def seek(self, int n):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_decode_bytearray(__pyx_v_value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_decode_bytearray(__pyx_v_value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 287, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":258
+  /* "dc/util.pyx":279
  *         return value.decode('utf-8')
  * 
  *     def get_string32(self):             # <<<<<<<<<<<<<<
@@ -6633,7 +6913,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_26get_string32(struct __p
   return __pyx_r;
 }
 
-/* "dc/util.pyx":268
+/* "dc/util.pyx":289
  *         return value.decode('utf-8')
  * 
  *     def seek(self, int n):             # <<<<<<<<<<<<<<
@@ -6649,7 +6929,7 @@ static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_29seek(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("seek (wrapper)", 0);
   assert(__pyx_arg_n); {
-    __pyx_v_n = __Pyx_PyInt_As_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+    __pyx_v_n = __Pyx_PyInt_As_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 289, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6672,7 +6952,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_28seek(struct __pyx_obj_2
   unsigned int __pyx_t_3;
   __Pyx_RefNannySetupContext("seek", 0);
 
-  /* "dc/util.pyx":269
+  /* "dc/util.pyx":290
  * 
  *     def seek(self, int n):
  *         self.offset = min(n, self.dg.length)             # <<<<<<<<<<<<<<
@@ -6688,7 +6968,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_28seek(struct __pyx_obj_2
   }
   __pyx_v_self->offset = __pyx_t_3;
 
-  /* "dc/util.pyx":268
+  /* "dc/util.pyx":289
  *         return value.decode('utf-8')
  * 
  *     def seek(self, int n):             # <<<<<<<<<<<<<<
@@ -6703,7 +6983,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_28seek(struct __pyx_obj_2
   return __pyx_r;
 }
 
-/* "dc/util.pyx":271
+/* "dc/util.pyx":292
  *         self.offset = min(n, self.dg.length)
  * 
  *     def skip(self, unsigned int n):             # <<<<<<<<<<<<<<
@@ -6719,7 +6999,7 @@ static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_31skip(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("skip (wrapper)", 0);
   assert(__pyx_arg_n); {
-    __pyx_v_n = __Pyx_PyInt_As_unsigned_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 271, __pyx_L3_error)
+    __pyx_v_n = __Pyx_PyInt_As_unsigned_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 292, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6742,7 +7022,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_30skip(struct __pyx_obj_2
   unsigned int __pyx_t_3;
   __Pyx_RefNannySetupContext("skip", 0);
 
-  /* "dc/util.pyx":272
+  /* "dc/util.pyx":293
  * 
  *     def skip(self, unsigned int n):
  *         self.offset += n             # <<<<<<<<<<<<<<
@@ -6751,7 +7031,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_30skip(struct __pyx_obj_2
  */
   __pyx_v_self->offset = (__pyx_v_self->offset + __pyx_v_n);
 
-  /* "dc/util.pyx":273
+  /* "dc/util.pyx":294
  *     def skip(self, unsigned int n):
  *         self.offset += n
  *         self.offset = min(self.dg.length, self.offset)             # <<<<<<<<<<<<<<
@@ -6767,7 +7047,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_30skip(struct __pyx_obj_2
   }
   __pyx_v_self->offset = __pyx_t_3;
 
-  /* "dc/util.pyx":271
+  /* "dc/util.pyx":292
  *         self.offset = min(n, self.dg.length)
  * 
  *     def skip(self, unsigned int n):             # <<<<<<<<<<<<<<
@@ -6782,7 +7062,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_30skip(struct __pyx_obj_2
   return __pyx_r;
 }
 
-/* "dc/util.pyx":275
+/* "dc/util.pyx":296
  *         self.offset = min(self.dg.length, self.offset)
  * 
  *     def remaining(self):             # <<<<<<<<<<<<<<
@@ -6811,7 +7091,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("remaining", 0);
 
-  /* "dc/util.pyx":276
+  /* "dc/util.pyx":297
  * 
  *     def remaining(self):
  *         cdef int remaining = self.dg.length - self.offset             # <<<<<<<<<<<<<<
@@ -6820,7 +7100,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
  */
   __pyx_v_remaining = (__pyx_v_self->dg->length - __pyx_v_self->offset);
 
-  /* "dc/util.pyx":277
+  /* "dc/util.pyx":298
  *     def remaining(self):
  *         cdef int remaining = self.dg.length - self.offset
  *         if remaining < 0:             # <<<<<<<<<<<<<<
@@ -6830,7 +7110,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
   __pyx_t_1 = ((__pyx_v_remaining < 0) != 0);
   if (__pyx_t_1) {
 
-    /* "dc/util.pyx":278
+    /* "dc/util.pyx":299
  *         cdef int remaining = self.dg.length - self.offset
  *         if remaining < 0:
  *             return 0             # <<<<<<<<<<<<<<
@@ -6842,7 +7122,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
     __pyx_r = __pyx_int_0;
     goto __pyx_L0;
 
-    /* "dc/util.pyx":277
+    /* "dc/util.pyx":298
  *     def remaining(self):
  *         cdef int remaining = self.dg.length - self.offset
  *         if remaining < 0:             # <<<<<<<<<<<<<<
@@ -6851,21 +7131,21 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
  */
   }
 
-  /* "dc/util.pyx":280
+  /* "dc/util.pyx":301
  *             return 0
  * 
  *         return remaining             # <<<<<<<<<<<<<<
  * 
- *     def tell(self):
+ *     def get_remaining(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_remaining); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_remaining); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":275
+  /* "dc/util.pyx":296
  *         self.offset = min(self.dg.length, self.offset)
  * 
  *     def remaining(self):             # <<<<<<<<<<<<<<
@@ -6884,8 +7164,110 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":282
+/* "dc/util.pyx":303
  *         return remaining
+ * 
+ *     def get_remaining(self):             # <<<<<<<<<<<<<<
+ *         cdef int remaining = self.dg.length - self.offset
+ *         if remaining <= 0:
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_35get_remaining(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_35get_remaining(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_remaining (wrapper)", 0);
+  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_34get_remaining(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34get_remaining(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
+  int __pyx_v_remaining;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  __Pyx_RefNannySetupContext("get_remaining", 0);
+
+  /* "dc/util.pyx":304
+ * 
+ *     def get_remaining(self):
+ *         cdef int remaining = self.dg.length - self.offset             # <<<<<<<<<<<<<<
+ *         if remaining <= 0:
+ *             return b''
+ */
+  __pyx_v_remaining = (__pyx_v_self->dg->length - __pyx_v_self->offset);
+
+  /* "dc/util.pyx":305
+ *     def get_remaining(self):
+ *         cdef int remaining = self.dg.length - self.offset
+ *         if remaining <= 0:             # <<<<<<<<<<<<<<
+ *             return b''
+ * 
+ */
+  __pyx_t_1 = ((__pyx_v_remaining <= 0) != 0);
+  if (__pyx_t_1) {
+
+    /* "dc/util.pyx":306
+ *         cdef int remaining = self.dg.length - self.offset
+ *         if remaining <= 0:
+ *             return b''             # <<<<<<<<<<<<<<
+ * 
+ *         return self.dg.buffer[self.offset:self.dg.length]
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(__pyx_kp_b__8);
+    __pyx_r = __pyx_kp_b__8;
+    goto __pyx_L0;
+
+    /* "dc/util.pyx":305
+ *     def get_remaining(self):
+ *         cdef int remaining = self.dg.length - self.offset
+ *         if remaining <= 0:             # <<<<<<<<<<<<<<
+ *             return b''
+ * 
+ */
+  }
+
+  /* "dc/util.pyx":308
+ *             return b''
+ * 
+ *         return self.dg.buffer[self.offset:self.dg.length]             # <<<<<<<<<<<<<<
+ * 
+ *     def tell(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_2 = __Pyx_PyBytes_FromStringAndSize(((const char*)__pyx_v_self->dg->buffer) + __pyx_v_self->offset, __pyx_v_self->dg->length - __pyx_v_self->offset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "dc/util.pyx":303
+ *         return remaining
+ * 
+ *     def get_remaining(self):             # <<<<<<<<<<<<<<
+ *         cdef int remaining = self.dg.length - self.offset
+ *         if remaining <= 0:
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("dc.util.DatagramIterator.get_remaining", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "dc/util.pyx":310
+ *         return self.dg.buffer[self.offset:self.dg.length]
  * 
  *     def tell(self):             # <<<<<<<<<<<<<<
  *         return self.offset
@@ -6893,25 +7275,25 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_32remaining(struct __pyx_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_35tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_35tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_37tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_37tell(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tell (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_34tell(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_36tell(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34tell(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36tell(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("tell", 0);
 
-  /* "dc/util.pyx":283
+  /* "dc/util.pyx":311
  * 
  *     def tell(self):
  *         return self.offset             # <<<<<<<<<<<<<<
@@ -6919,14 +7301,14 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34tell(struct __pyx_obj_2
  *     def get_channel(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_int(__pyx_v_self->offset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":282
- *         return remaining
+  /* "dc/util.pyx":310
+ *         return self.dg.buffer[self.offset:self.dg.length]
  * 
  *     def tell(self):             # <<<<<<<<<<<<<<
  *         return self.offset
@@ -6944,7 +7326,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34tell(struct __pyx_obj_2
   return __pyx_r;
 }
 
-/* "dc/util.pyx":285
+/* "dc/util.pyx":313
  *         return self.offset
  * 
  *     def get_channel(self):             # <<<<<<<<<<<<<<
@@ -6953,19 +7335,19 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_34tell(struct __pyx_obj_2
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_37get_channel(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_37get_channel(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_39get_channel(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_39get_channel(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_channel (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_36get_channel(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_38get_channel(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36get_channel(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_38get_channel(struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6973,7 +7355,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36get_channel(struct __py
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("get_channel", 0);
 
-  /* "dc/util.pyx":286
+  /* "dc/util.pyx":314
  * 
  *     def get_channel(self):
  *         return self.get_int64()             # <<<<<<<<<<<<<<
@@ -6981,7 +7363,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36get_channel(struct __py
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_int64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_int64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6995,14 +7377,14 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36get_channel(struct __py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":285
+  /* "dc/util.pyx":313
  *         return self.offset
  * 
  *     def get_channel(self):             # <<<<<<<<<<<<<<
@@ -7030,19 +7412,19 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_36get_channel(struct __py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_39__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_39__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_41__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_41__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_38__reduce_cython__(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
+  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_40__reduce_cython__(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_38__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_40__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7054,7 +7436,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_38__reduce_cython__(CYTHO
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7084,19 +7466,19 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_38__reduce_cython__(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_41__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_41__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_43__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_2dc_4util_16DatagramIterator_43__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_40__setstate_cython__(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_2dc_4util_16DatagramIterator_42__setstate_cython__(((struct __pyx_obj_2dc_4util_DatagramIterator *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_40__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_42__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_2dc_4util_DatagramIterator *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7107,7 +7489,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_40__setstate_cython__(CYT
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7130,7 +7512,7 @@ static PyObject *__pyx_pf_2dc_4util_16DatagramIterator_40__setstate_cython__(CYT
   return __pyx_r;
 }
 
-/* "dc/util.pyx":302
+/* "dc/util.pyx":330
  *     cdef int index
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -7159,7 +7541,7 @@ static int __pyx_pf_2dc_4util_13HashGenerator___cinit__(struct __pyx_obj_2dc_4ut
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "dc/util.pyx":303
+  /* "dc/util.pyx":331
  * 
  *     def __cinit__(self):
  *         self.hash = 0             # <<<<<<<<<<<<<<
@@ -7168,7 +7550,7 @@ static int __pyx_pf_2dc_4util_13HashGenerator___cinit__(struct __pyx_obj_2dc_4ut
  */
   __pyx_v_self->hash = 0;
 
-  /* "dc/util.pyx":304
+  /* "dc/util.pyx":332
  *     def __cinit__(self):
  *         self.hash = 0
  *         self.index = 0             # <<<<<<<<<<<<<<
@@ -7177,7 +7559,7 @@ static int __pyx_pf_2dc_4util_13HashGenerator___cinit__(struct __pyx_obj_2dc_4ut
  */
   __pyx_v_self->index = 0;
 
-  /* "dc/util.pyx":302
+  /* "dc/util.pyx":330
  *     cdef int index
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -7191,7 +7573,7 @@ static int __pyx_pf_2dc_4util_13HashGenerator___cinit__(struct __pyx_obj_2dc_4ut
   return __pyx_r;
 }
 
-/* "dc/util.pyx":306
+/* "dc/util.pyx":334
  *         self.index = 0
  * 
  *     def add_int(self, int n):             # <<<<<<<<<<<<<<
@@ -7207,7 +7589,7 @@ static PyObject *__pyx_pw_2dc_4util_13HashGenerator_3add_int(PyObject *__pyx_v_s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_int (wrapper)", 0);
   assert(__pyx_arg_n); {
-    __pyx_v_n = __Pyx_PyInt_As_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 306, __pyx_L3_error)
+    __pyx_v_n = __Pyx_PyInt_As_int(__pyx_arg_n); if (unlikely((__pyx_v_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 334, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7228,7 +7610,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_2add_int(struct __pyx_obj_2d
   long __pyx_t_1;
   __Pyx_RefNannySetupContext("add_int", 0);
 
-  /* "dc/util.pyx":307
+  /* "dc/util.pyx":335
  * 
  *     def add_int(self, int n):
  *         self.hash += get_prime(self.index) * n             # <<<<<<<<<<<<<<
@@ -7237,7 +7619,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_2add_int(struct __pyx_obj_2d
  */
   __pyx_v_self->hash = (__pyx_v_self->hash + (get_prime(__pyx_v_self->index) * __pyx_v_n));
 
-  /* "dc/util.pyx":308
+  /* "dc/util.pyx":336
  *     def add_int(self, int n):
  *         self.hash += get_prime(self.index) * n
  *         self.index = (self.index + 1) % PRIME_COUNT             # <<<<<<<<<<<<<<
@@ -7247,11 +7629,11 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_2add_int(struct __pyx_obj_2d
   __pyx_t_1 = (__pyx_v_self->index + 1);
   if (unlikely(__pyx_v_2dc_4util_PRIME_COUNT == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-    __PYX_ERR(0, 308, __pyx_L1_error)
+    __PYX_ERR(0, 336, __pyx_L1_error)
   }
   __pyx_v_self->index = __Pyx_mod_long(__pyx_t_1, __pyx_v_2dc_4util_PRIME_COUNT);
 
-  /* "dc/util.pyx":306
+  /* "dc/util.pyx":334
  *         self.index = 0
  * 
  *     def add_int(self, int n):             # <<<<<<<<<<<<<<
@@ -7271,7 +7653,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_2add_int(struct __pyx_obj_2d
   return __pyx_r;
 }
 
-/* "dc/util.pyx":310
+/* "dc/util.pyx":338
  *         self.index = (self.index + 1) % PRIME_COUNT
  * 
  *     def add_bytes(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -7287,7 +7669,7 @@ static PyObject *__pyx_pw_2dc_4util_13HashGenerator_5add_bytes(PyObject *__pyx_v
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_bytes (wrapper)", 0);
   assert(__pyx_arg_data); {
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 310, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char__const__(__pyx_arg_data, 0); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 338, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7314,21 +7696,20 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_4add_bytes(struct __pyx_obj_
   long __pyx_t_6;
   unsigned int __pyx_t_7;
   size_t __pyx_t_8;
-  int __pyx_t_9;
   __Pyx_RefNannySetupContext("add_bytes", 0);
 
-  /* "dc/util.pyx":311
+  /* "dc/util.pyx":339
  * 
  *     def add_bytes(self, const unsigned char[:] data):
  *         self.add_int(data.size)             # <<<<<<<<<<<<<<
  * 
  *         cdef unsigned int i
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_int); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_int); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -7344,46 +7725,40 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_4add_bytes(struct __pyx_obj_
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "dc/util.pyx":314
+  /* "dc/util.pyx":342
  * 
  *         cdef unsigned int i
  *         for i in range(data.size):             # <<<<<<<<<<<<<<
  *             self.add_int(data[i])
  * 
  */
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_data, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_size); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_5 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_5 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_5 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_6 = __pyx_t_5;
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "dc/util.pyx":315
+    /* "dc/util.pyx":343
  *         cdef unsigned int i
  *         for i in range(data.size):
  *             self.add_int(data[i])             # <<<<<<<<<<<<<<
  * 
  *     def add_string(self, s):
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_int); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_int); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_8 = __pyx_v_i;
-    __pyx_t_9 = -1;
-    if (unlikely(__pyx_t_8 >= (size_t)__pyx_v_data.shape[0])) __pyx_t_9 = 0;
-    if (unlikely(__pyx_t_9 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_9);
-      __PYX_ERR(0, 315, __pyx_L1_error)
-    }
-    __pyx_t_4 = __Pyx_PyInt_From_unsigned_char((*((unsigned char const  *) ( /* dim=0 */ (__pyx_v_data.data + __pyx_t_8 * __pyx_v_data.strides[0]) )))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 315, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_unsigned_char((*((unsigned char const  *) ( /* dim=0 */ (__pyx_v_data.data + __pyx_t_8 * __pyx_v_data.strides[0]) )))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 343, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_3 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -7398,13 +7773,13 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_4add_bytes(struct __pyx_obj_
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 343, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "dc/util.pyx":310
+  /* "dc/util.pyx":338
  *         self.index = (self.index + 1) % PRIME_COUNT
  * 
  *     def add_bytes(self, const unsigned char[:] data):             # <<<<<<<<<<<<<<
@@ -7429,7 +7804,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_4add_bytes(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "dc/util.pyx":317
+/* "dc/util.pyx":345
  *             self.add_int(data[i])
  * 
  *     def add_string(self, s):             # <<<<<<<<<<<<<<
@@ -7460,7 +7835,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_6add_string(struct __pyx_obj
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("add_string", 0);
 
-  /* "dc/util.pyx":318
+  /* "dc/util.pyx":346
  * 
  *     def add_string(self, s):
  *         return self.add_bytes(s.encode('utf-8'))             # <<<<<<<<<<<<<<
@@ -7468,9 +7843,9 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_6add_string(struct __pyx_obj
  *     def get_hash(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_s, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_s, __pyx_n_s_encode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -7484,7 +7859,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_6add_string(struct __pyx_obj
   }
   __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_kp_u_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_u_utf_8);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 318, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -7500,14 +7875,14 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_6add_string(struct __pyx_obj
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":317
+  /* "dc/util.pyx":345
  *             self.add_int(data[i])
  * 
  *     def add_string(self, s):             # <<<<<<<<<<<<<<
@@ -7530,7 +7905,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_6add_string(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "dc/util.pyx":320
+/* "dc/util.pyx":348
  *         return self.add_bytes(s.encode('utf-8'))
  * 
  *     def get_hash(self):             # <<<<<<<<<<<<<<
@@ -7558,7 +7933,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_8get_hash(struct __pyx_obj_2
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("get_hash", 0);
 
-  /* "dc/util.pyx":321
+  /* "dc/util.pyx":349
  * 
  *     def get_hash(self):
  *         return self.hash & 0xffffffff             # <<<<<<<<<<<<<<
@@ -7566,16 +7941,16 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_8get_hash(struct __pyx_obj_2
  *     @staticmethod
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v_self->hash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v_self->hash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_And(__pyx_t_1, __pyx_int_4294967295); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_And(__pyx_t_1, __pyx_int_4294967295); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":320
+  /* "dc/util.pyx":348
  *         return self.add_bytes(s.encode('utf-8'))
  * 
  *     def get_hash(self):             # <<<<<<<<<<<<<<
@@ -7595,7 +7970,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_8get_hash(struct __pyx_obj_2
   return __pyx_r;
 }
 
-/* "dc/util.pyx":324
+/* "dc/util.pyx":352
  * 
  *     @staticmethod
  *     def get_prime_count():             # <<<<<<<<<<<<<<
@@ -7625,19 +8000,19 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_10get_prime_count(void) {
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_prime_count", 0);
 
-  /* "dc/util.pyx":325
+  /* "dc/util.pyx":353
  *     @staticmethod
  *     def get_prime_count():
  *         return PRIME_COUNT             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_2dc_4util_PRIME_COUNT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_2dc_4util_PRIME_COUNT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "dc/util.pyx":324
+  /* "dc/util.pyx":352
  * 
  *     @staticmethod
  *     def get_prime_count():             # <<<<<<<<<<<<<<
@@ -7686,7 +8061,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_12__reduce_cython__(CYTHON_U
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7739,7 +8114,7 @@ static PyObject *__pyx_pf_2dc_4util_13HashGenerator_14__setstate_cython__(CYTHON
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7959,7 +8334,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *         if itemsize <= 0:
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 133, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -7991,7 +8366,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *         if not isinstance(format, bytes):
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 136, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8118,7 +8493,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 148, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8392,7 +8767,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *             if self.dtype_is_object:
  */
-      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 176, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(1, 176, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_Raise(__pyx_t_10, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -8633,7 +9008,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(stru
  *         info.buf = self.data
  *         info.len = self.len
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 192, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 192, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9349,7 +9724,7 @@ static PyObject *__pyx_pf___pyx_array___reduce_cython__(CYTHON_UNUSED struct __p
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -9402,7 +9777,7 @@ static PyObject *__pyx_pf___pyx_array_2__setstate_cython__(CYTHON_UNUSED struct 
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -11085,7 +11460,7 @@ static int __pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_6__setit
  * 
  *         have_slices, index = _unellipsify(index, self.view.ndim)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 418, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 418, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -12056,7 +12431,7 @@ static PyObject *__pyx_memoryview_convert_item_to_object(struct __pyx_memoryview
  * 
  */
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_result, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 498, __pyx_L5_except_error)
+        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_result, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 498, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_1);
         __pyx_r = __pyx_t_1;
         __pyx_t_1 = 0;
@@ -12118,7 +12493,7 @@ static PyObject *__pyx_memoryview_convert_item_to_object(struct __pyx_memoryview
  *         else:
  *             if len(self.view.format) == 1:
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 495, __pyx_L5_except_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 495, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -12474,7 +12849,7 @@ static int __pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_8__getbu
  * 
  *         if flags & PyBUF_ND:
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 520, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 520, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -13014,7 +13389,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_10memoryview_7strides___get__(st
  * 
  *         return tuple([stride for stride in self.view.strides[:self.view.ndim]])
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 570, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 570, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -13128,7 +13503,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_10memoryview_10suboffsets___get_
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->view.ndim); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 577, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyNumber_Multiply(__pyx_tuple__23, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 577, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_tuple__24, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 577, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_r = __pyx_t_3;
@@ -14133,7 +14508,7 @@ static PyObject *__pyx_pf___pyx_memoryview___reduce_cython__(CYTHON_UNUSED struc
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -14186,7 +14561,7 @@ static PyObject *__pyx_pf___pyx_memoryview_2__setstate_cython__(CYTHON_UNUSED st
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -14537,9 +14912,9 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
         __Pyx_GOTREF(__pyx_t_7);
         { Py_ssize_t __pyx_temp;
           for (__pyx_temp=0; __pyx_temp < ((__pyx_v_ndim - __pyx_t_8) + 1); __pyx_temp++) {
-            __Pyx_INCREF(__pyx_slice__26);
-            __Pyx_GIVEREF(__pyx_slice__26);
-            PyList_SET_ITEM(__pyx_t_7, __pyx_temp, __pyx_slice__26);
+            __Pyx_INCREF(__pyx_slice__27);
+            __Pyx_GIVEREF(__pyx_slice__27);
+            PyList_SET_ITEM(__pyx_t_7, __pyx_temp, __pyx_slice__27);
           }
         }
         __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_result, __pyx_t_7); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 682, __pyx_L1_error)
@@ -14572,7 +14947,7 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
  *         else:
  */
       /*else*/ {
-        __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_slice__26); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 685, __pyx_L1_error)
+        __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_slice__27); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 685, __pyx_L1_error)
       }
       __pyx_L7:;
 
@@ -14712,9 +15087,9 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
     __Pyx_GOTREF(__pyx_t_3);
     { Py_ssize_t __pyx_temp;
       for (__pyx_temp=0; __pyx_temp < __pyx_v_nslices; __pyx_temp++) {
-        __Pyx_INCREF(__pyx_slice__26);
-        __Pyx_GIVEREF(__pyx_slice__26);
-        PyList_SET_ITEM(__pyx_t_3, __pyx_temp, __pyx_slice__26);
+        __Pyx_INCREF(__pyx_slice__27);
+        __Pyx_GIVEREF(__pyx_slice__27);
+        PyList_SET_ITEM(__pyx_t_3, __pyx_temp, __pyx_slice__27);
       }
     }
     __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_result, __pyx_t_3); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 696, __pyx_L1_error)
@@ -14838,7 +15213,7 @@ static PyObject *assert_direct_dimensions(Py_ssize_t *__pyx_v_suboffsets, int __
  * 
  * 
  */
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__27, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 703, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__28, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 703, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -17001,7 +17376,7 @@ static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED 
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__28, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__29, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -17054,7 +17429,7 @@ static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUS
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__29, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__30, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -20488,7 +20863,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     __PYX_ERR(1, 12, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->name);
@@ -20533,7 +20908,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
       __PYX_ERR(1, 14, __pyx_L1_error)
     }
-    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 14, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 14, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -20668,8 +21043,8 @@ static PyObject *__pyx_format_from_typeinfo(__Pyx_TypeInfo *__pyx_v_type) {
  *         else:
  *             alignment = b''
  */
-      __Pyx_INCREF(__pyx_kp_b__30);
-      __pyx_v_alignment = __pyx_kp_b__30;
+      __Pyx_INCREF(__pyx_kp_b__31);
+      __pyx_v_alignment = __pyx_kp_b__31;
 
       /* "BufferFormatFromTypeInfo":1471
  *         assert type.fields != NULL and type.fields.type != NULL
@@ -20689,8 +21064,8 @@ static PyObject *__pyx_format_from_typeinfo(__Pyx_TypeInfo *__pyx_v_type) {
  *         parts = [b"T{"]
  */
     /*else*/ {
-      __Pyx_INCREF(__pyx_kp_b__31);
-      __pyx_v_alignment = __pyx_kp_b__31;
+      __Pyx_INCREF(__pyx_kp_b__8);
+      __pyx_v_alignment = __pyx_kp_b__8;
     }
     __pyx_L6:;
 
@@ -20960,7 +21335,7 @@ static void __pyx_tp_dealloc_2dc_4util_Datagram(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_2dc_4util_8Datagram_37__dealloc__(o);
+    __pyx_pw_2dc_4util_8Datagram_41__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
@@ -20982,15 +21357,17 @@ static PyMethodDef __pyx_methods_2dc_4util_Datagram[] = {
   {"add_string32", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_25add_string32, METH_O, 0},
   {"add_float32", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_27add_float32, METH_O, 0},
   {"add_float64", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_29add_float64, METH_O, 0},
-  {"add_datagram", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_31add_datagram, METH_O, 0},
-  {"get_message", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_33get_message, METH_NOARGS, 0},
-  {"get_length", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_35get_length, METH_NOARGS, 0},
-  {"iterator", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_39iterator, METH_NOARGS, 0},
-  {"copy", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_41copy, METH_NOARGS, 0},
-  {"seek", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_43seek, METH_O, 0},
-  {"tell", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_45tell, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_47__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_49__setstate_cython__, METH_O, 0},
+  {"add_server_header", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_2dc_4util_8Datagram_31add_server_header, METH_VARARGS|METH_KEYWORDS, 0},
+  {"add_server_control_header", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_33add_server_control_header, METH_O, 0},
+  {"add_datagram", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_35add_datagram, METH_O, 0},
+  {"get_message", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_37get_message, METH_NOARGS, 0},
+  {"get_length", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_39get_length, METH_NOARGS, 0},
+  {"iterator", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_43iterator, METH_NOARGS, 0},
+  {"copy", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_45copy, METH_NOARGS, 0},
+  {"seek", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_47seek, METH_O, 0},
+  {"tell", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_49tell, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_51__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_2dc_4util_8Datagram_53__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -21130,10 +21507,11 @@ static PyMethodDef __pyx_methods_2dc_4util_DatagramIterator[] = {
   {"seek", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_29seek, METH_O, 0},
   {"skip", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_31skip, METH_O, 0},
   {"remaining", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_33remaining, METH_NOARGS, 0},
-  {"tell", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_35tell, METH_NOARGS, 0},
-  {"get_channel", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_37get_channel, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_39__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_41__setstate_cython__, METH_O, 0},
+  {"get_remaining", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_35get_remaining, METH_NOARGS, 0},
+  {"tell", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_37tell, METH_NOARGS, 0},
+  {"get_channel", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_39get_channel, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_41__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_2dc_4util_16DatagramIterator_43__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -22099,11 +22477,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_View_MemoryView, __pyx_k_View_MemoryView, sizeof(__pyx_k_View_MemoryView), 0, 0, 1, 1},
-  {&__pyx_kp_b__30, __pyx_k__30, sizeof(__pyx_k__30), 0, 0, 0, 0},
   {&__pyx_kp_b__31, __pyx_k__31, sizeof(__pyx_k__31), 0, 0, 0, 0},
   {&__pyx_kp_b__32, __pyx_k__32, sizeof(__pyx_k__32), 0, 0, 0, 0},
   {&__pyx_kp_b__33, __pyx_k__33, sizeof(__pyx_k__33), 0, 0, 0, 0},
   {&__pyx_kp_u__34, __pyx_k__34, sizeof(__pyx_k__34), 0, 1, 0, 0},
+  {&__pyx_kp_b__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 0, 0},
   {&__pyx_n_s_add_bytes, __pyx_k_add_bytes, sizeof(__pyx_k_add_bytes), 0, 0, 1, 1},
   {&__pyx_n_s_add_int, __pyx_k_add_int, sizeof(__pyx_k_add_int), 0, 0, 1, 1},
   {&__pyx_n_s_add_uint64, __pyx_k_add_uint64, sizeof(__pyx_k_add_uint64), 0, 0, 1, 1},
@@ -22143,6 +22521,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
+  {&__pyx_n_s_msg_id, __pyx_k_msg_id, sizeof(__pyx_k_msg_id), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 0, 1, 1},
   {&__pyx_n_s_ndim, __pyx_k_ndim, sizeof(__pyx_k_ndim), 0, 0, 1, 1},
@@ -22166,6 +22545,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_kp_u_s, __pyx_k_s, sizeof(__pyx_k_s), 0, 1, 0, 0},
+  {&__pyx_n_s_sender, __pyx_k_sender, sizeof(__pyx_k_sender), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
@@ -22179,6 +22559,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_strided_and_indirect, __pyx_k_strided_and_indirect, sizeof(__pyx_k_strided_and_indirect), 0, 0, 1, 0},
   {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
   {&__pyx_n_s_struct, __pyx_k_struct, sizeof(__pyx_k_struct), 0, 0, 1, 1},
+  {&__pyx_n_s_targets, __pyx_k_targets, sizeof(__pyx_k_targets), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_kp_u_tried_reading_past_datagram, __pyx_k_tried_reading_past_datagram, sizeof(__pyx_k_tried_reading_past_datagram), 0, 1, 0, 0},
   {&__pyx_kp_u_tried_reading_past_datagram_stri, __pyx_k_tried_reading_past_datagram_stri, sizeof(__pyx_k_tried_reading_past_datagram_stri), 0, 1, 0, 0},
@@ -22192,11 +22573,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 323, __pyx_L1_error)
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 40, __pyx_L1_error)
-  __pyx_builtin_OverflowError = __Pyx_GetBuiltinName(__pyx_n_s_OverflowError); if (!__pyx_builtin_OverflowError) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_builtin_OverflowError = __Pyx_GetBuiltinName(__pyx_n_s_OverflowError); if (!__pyx_builtin_OverflowError) __PYX_ERR(0, 167, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 342, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 133, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 151, __pyx_L1_error)
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_n_s_Ellipsis); if (!__pyx_builtin_Ellipsis) __PYX_ERR(1, 404, __pyx_L1_error)
@@ -22211,47 +22592,47 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "dc/util.pyx":40
+  /* "dc/util.pyx":45
  *         self.append_data(&value, sizeof(value))
  *         if self.buffer is NULL:
  *             raise MemoryError('could not allocate memory for datagram')             # <<<<<<<<<<<<<<
  * 
  *     def add_uint8(self, const unsigned char value):
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_could_not_allocate_memory_for_da); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_could_not_allocate_memory_for_da); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "dc/util.pyx":130
+  /* "dc/util.pyx":151
  *     def iterator(self):
  *         if self.buffer is NULL:
  *             raise MemoryError('tried to make iterator of invalid datagram')             # <<<<<<<<<<<<<<
  *         cdef DatagramIterator dgi = DatagramIterator()
  *         dgi.set_dg(<void *>self)
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_tried_to_make_iterator_of_invali); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_tried_to_make_iterator_of_invali); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "dc/util.pyx":137
+  /* "dc/util.pyx":158
  *     def copy(self):
  *         if self.buffer is NULL:
  *             raise MemoryError('tried to make copy of invalid datagram')             # <<<<<<<<<<<<<<
  *         cdef Datagram copy_dg = Datagram()
  *         copy_dg.check_resize(self.length)
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_tried_to_make_copy_of_invalid_da); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_tried_to_make_copy_of_invalid_da); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "dc/util.pyx":146
+  /* "dc/util.pyx":167
  *     def seek(self, unsigned int n):
  *         if n < 0 or n > self.length:
  *             raise OverflowError('invalid pos in Datagram')             # <<<<<<<<<<<<<<
  *         self.offset = n
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_invalid_pos_in_Datagram); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_invalid_pos_in_Datagram); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
@@ -22274,14 +22655,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "dc/util.pyx":169
+  /* "dc/util.pyx":190
  *     def get_int8(self):
  *         if self.offset + sizeof(char) > self.dg.length:
  *             raise OverflowError('tried reading past datagram')             # <<<<<<<<<<<<<<
  * 
  *         cdef char value
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_tried_reading_past_datagram); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_tried_reading_past_datagram); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
@@ -22291,18 +22672,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -22310,18 +22691,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
 
   /* "View.MemoryView":133
  * 
@@ -22330,9 +22711,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         if itemsize <= 0:
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_Empty_shape_tuple_for_cython_arr); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 133, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_Empty_shape_tuple_for_cython_arr); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 133, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
 
   /* "View.MemoryView":136
  * 
@@ -22341,9 +22722,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         if not isinstance(format, bytes):
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_itemsize_0_for_cython_array); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 136, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_itemsize_0_for_cython_array); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
 
   /* "View.MemoryView":148
  * 
@@ -22352,9 +22733,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_shape_and_str); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 148, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_shape_and_str); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(1, 148, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
 
   /* "View.MemoryView":176
  *             self.data = <char *>malloc(self.len)
@@ -22363,9 +22744,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *             if self.dtype_is_object:
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_array_data); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(1, 176, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_array_data); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(1, 176, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
 
   /* "View.MemoryView":192
  *             bufmode = PyBUF_F_CONTIGUOUS | PyBUF_ANY_CONTIGUOUS
@@ -22374,9 +22755,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         info.buf = self.data
  *         info.len = self.len
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_Can_only_create_a_buffer_that_is); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(1, 192, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_Can_only_create_a_buffer_that_is); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 192, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -22384,18 +22765,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
   /* "View.MemoryView":418
  *     def __setitem__(memoryview self, object index, object value):
@@ -22404,9 +22785,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         have_slices, index = _unellipsify(index, self.view.ndim)
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_Cannot_assign_to_read_only_memor); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 418, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_Cannot_assign_to_read_only_memor); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 418, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
   /* "View.MemoryView":495
  *             result = struct.unpack(self.view.format, bytesitem)
@@ -22415,9 +22796,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         else:
  *             if len(self.view.format) == 1:
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_convert_item_to_object); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 495, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_convert_item_to_object); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 495, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
   /* "View.MemoryView":520
  *     def __getbuffer__(self, Py_buffer *info, int flags):
@@ -22426,9 +22807,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         if flags & PyBUF_ND:
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Cannot_create_writable_memory_vi); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 520, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_Cannot_create_writable_memory_vi); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 520, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "View.MemoryView":570
  *         if self.view.strides == NULL:
@@ -22437,9 +22818,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         return tuple([stride for stride in self.view.strides[:self.view.ndim]])
  */
-  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_Buffer_view_does_not_expose_stri); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 570, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_Buffer_view_does_not_expose_stri); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 570, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
   /* "View.MemoryView":577
  *     def suboffsets(self):
@@ -22448,12 +22829,12 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *         return tuple([suboffset for suboffset in self.view.suboffsets[:self.view.ndim]])
  */
-  __pyx_tuple__23 = PyTuple_New(1); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 577, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
+  __pyx_tuple__24 = PyTuple_New(1); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 577, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_INCREF(__pyx_int_neg_1);
   __Pyx_GIVEREF(__pyx_int_neg_1);
-  PyTuple_SET_ITEM(__pyx_tuple__23, 0, __pyx_int_neg_1);
-  __Pyx_GIVEREF(__pyx_tuple__23);
+  PyTuple_SET_ITEM(__pyx_tuple__24, 0, __pyx_int_neg_1);
+  __Pyx_GIVEREF(__pyx_tuple__24);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -22461,18 +22842,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__25);
-  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
 
   /* "View.MemoryView":682
  *         if item is Ellipsis:
@@ -22481,9 +22862,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                 seen_ellipsis = True
  *             else:
  */
-  __pyx_slice__26 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__26)) __PYX_ERR(1, 682, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__26);
-  __Pyx_GIVEREF(__pyx_slice__26);
+  __pyx_slice__27 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__27)) __PYX_ERR(1, 682, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__27);
+  __Pyx_GIVEREF(__pyx_slice__27);
 
   /* "View.MemoryView":703
  *     for suboffset in suboffsets[:ndim]:
@@ -22492,9 +22873,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__27 = PyTuple_Pack(1, __pyx_kp_s_Indirect_dimensions_not_supporte); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(1, 703, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__27);
-  __Pyx_GIVEREF(__pyx_tuple__27);
+  __pyx_tuple__28 = PyTuple_Pack(1, __pyx_kp_s_Indirect_dimensions_not_supporte); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(1, 703, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -22502,26 +22883,26 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__28 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__28);
-  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_tuple__29 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__29 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
 
-  /* "dc/util.pyx":324
+  /* "dc/util.pyx":352
  * 
  *     @staticmethod
  *     def get_prime_count():             # <<<<<<<<<<<<<<
  *         return PRIME_COUNT
  */
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_dc_util_pyx, __pyx_n_s_get_prime_count, 324, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_dc_util_pyx, __pyx_n_s_get_prime_count, 352, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 352, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -22650,40 +23031,40 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtabptr_2dc_4util_Datagram = &__pyx_vtable_2dc_4util_Datagram;
   __pyx_vtable_2dc_4util_Datagram.check_resize = (void (*)(struct __pyx_obj_2dc_4util_Datagram *, unsigned int const ))__pyx_f_2dc_4util_8Datagram_check_resize;
   __pyx_vtable_2dc_4util_Datagram.append_data = (void (*)(struct __pyx_obj_2dc_4util_Datagram *, void const *, unsigned int const ))__pyx_f_2dc_4util_8Datagram_append_data;
-  if (PyType_Ready(&__pyx_type_2dc_4util_Datagram) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_2dc_4util_Datagram) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_2dc_4util_Datagram.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_2dc_4util_Datagram.tp_dictoffset && __pyx_type_2dc_4util_Datagram.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_2dc_4util_Datagram.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_2dc_4util_Datagram.tp_dict, __pyx_vtabptr_2dc_4util_Datagram) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Datagram, (PyObject *)&__pyx_type_2dc_4util_Datagram) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_2dc_4util_Datagram) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_2dc_4util_Datagram.tp_dict, __pyx_vtabptr_2dc_4util_Datagram) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Datagram, (PyObject *)&__pyx_type_2dc_4util_Datagram) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_2dc_4util_Datagram) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __pyx_ptype_2dc_4util_Datagram = &__pyx_type_2dc_4util_Datagram;
   __pyx_vtabptr_2dc_4util_DatagramIterator = &__pyx_vtable_2dc_4util_DatagramIterator;
   __pyx_vtable_2dc_4util_DatagramIterator.set_dg = (PyObject *(*)(struct __pyx_obj_2dc_4util_DatagramIterator *, void *))__pyx_f_2dc_4util_16DatagramIterator_set_dg;
   __pyx_vtable_2dc_4util_DatagramIterator.get_data = (void (*)(struct __pyx_obj_2dc_4util_DatagramIterator *, void *, unsigned short const ))__pyx_f_2dc_4util_16DatagramIterator_get_data;
-  if (PyType_Ready(&__pyx_type_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_2dc_4util_DatagramIterator.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_2dc_4util_DatagramIterator.tp_dictoffset && __pyx_type_2dc_4util_DatagramIterator.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_2dc_4util_DatagramIterator.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_2dc_4util_DatagramIterator.tp_dict, __pyx_vtabptr_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_DatagramIterator, (PyObject *)&__pyx_type_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 152, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_2dc_4util_DatagramIterator.tp_dict, __pyx_vtabptr_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_DatagramIterator, (PyObject *)&__pyx_type_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_2dc_4util_DatagramIterator) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
   __pyx_ptype_2dc_4util_DatagramIterator = &__pyx_type_2dc_4util_DatagramIterator;
-  if (PyType_Ready(&__pyx_type_2dc_4util_HashGenerator) < 0) __PYX_ERR(0, 298, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_2dc_4util_HashGenerator) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_2dc_4util_HashGenerator.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_2dc_4util_HashGenerator.tp_dictoffset && __pyx_type_2dc_4util_HashGenerator.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_2dc_4util_HashGenerator.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_HashGenerator, (PyObject *)&__pyx_type_2dc_4util_HashGenerator) < 0) __PYX_ERR(0, 298, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_2dc_4util_HashGenerator) < 0) __PYX_ERR(0, 298, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_HashGenerator, (PyObject *)&__pyx_type_2dc_4util_HashGenerator) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_2dc_4util_HashGenerator) < 0) __PYX_ERR(0, 326, __pyx_L1_error)
   __pyx_ptype_2dc_4util_HashGenerator = &__pyx_type_2dc_4util_HashGenerator;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -22966,19 +23347,28 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "dc/util.pyx":4
+  /* "dc/util.pyx":6
  * from libc.stdlib cimport realloc, malloc, free
  * from libc.string cimport memcpy
  * import numpy as np             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "dc/util.pyx":295
+  /* "dc/util.pyx":9
+ * 
+ * 
+ * cdef unsigned short CONTROL_MESSAGE = 4001             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_v_2dc_4util_CONTROL_MESSAGE = 0xFA1;
+
+  /* "dc/util.pyx":323
  * 
  * 
  * cdef int MAX_PRIME = 104742             # <<<<<<<<<<<<<<
@@ -22987,7 +23377,7 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_v_2dc_4util_MAX_PRIME = 0x19926;
 
-  /* "dc/util.pyx":296
+  /* "dc/util.pyx":324
  * 
  * cdef int MAX_PRIME = 104742
  * cdef int PRIME_COUNT = initialize_primes(MAX_PRIME)             # <<<<<<<<<<<<<<
@@ -22996,38 +23386,38 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_v_2dc_4util_PRIME_COUNT = initialize_primes(__pyx_v_2dc_4util_MAX_PRIME);
 
-  /* "dc/util.pyx":324
+  /* "dc/util.pyx":352
  * 
  *     @staticmethod
  *     def get_prime_count():             # <<<<<<<<<<<<<<
  *         return PRIME_COUNT
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_2dc_4util_13HashGenerator_11get_prime_count, NULL, __pyx_n_s_dc_util); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_2dc_4util_13HashGenerator_11get_prime_count, NULL, __pyx_n_s_dc_util); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_2dc_4util_HashGenerator->tp_dict, __pyx_n_s_get_prime_count, __pyx_t_1) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_2dc_4util_HashGenerator->tp_dict, __pyx_n_s_get_prime_count, __pyx_t_1) < 0) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_2dc_4util_HashGenerator);
 
-  /* "dc/util.pyx":323
+  /* "dc/util.pyx":351
  *         return self.hash & 0xffffffff
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def get_prime_count():
  *         return PRIME_COUNT
  */
-  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_2dc_4util_HashGenerator, __pyx_n_s_get_prime_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_2dc_4util_HashGenerator, __pyx_n_s_get_prime_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_2dc_4util_HashGenerator->tp_dict, __pyx_n_s_get_prime_count, __pyx_t_2) < 0) __PYX_ERR(0, 324, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_2dc_4util_HashGenerator->tp_dict, __pyx_n_s_get_prime_count, __pyx_t_2) < 0) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_2dc_4util_HashGenerator);
 
   /* "dc/util.pyx":1
  * # cython: language_level=3             # <<<<<<<<<<<<<<
- * from libc.stdlib cimport realloc, malloc, free
- * from libc.string cimport memcpy
+ * # cython: boundscheck=False
+ * # cython: wraparound=False
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -23758,12 +24148,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 }
 #endif
 
-/* BufferIndexError */
-static void __Pyx_RaiseBufferIndexError(int axis) {
-  PyErr_Format(PyExc_IndexError,
-     "Out of bounds on buffer access (axis %d)", axis);
-}
-
 /* MemviewSliceInit */
 static int
 __Pyx_init_memviewslice(struct __pyx_memoryview_obj *memview,
@@ -23896,6 +24280,122 @@ static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *memslice,
     } else {
         memslice->memview = NULL;
     }
+}
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
 }
 
 /* ArgTypeTest */
@@ -24034,122 +24534,6 @@ static CYTHON_INLINE long __Pyx_mod_long(long a, long b) {
     long r = a % b;
     r += ((r != 0) & ((r ^ b) < 0)) * b;
     return r;
-}
-
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
 }
 
 /* BytesEquals */
@@ -26498,6 +26882,68 @@ static CYTHON_INLINE int __pyx_memview_set_unsigned_char(const char *itemp, PyOb
 }
 
 /* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_PY_LONG_LONG(PY_LONG_LONG value) {
+    const PY_LONG_LONG neg_one = (PY_LONG_LONG) ((PY_LONG_LONG) 0 - (PY_LONG_LONG) 1), const_zero = (PY_LONG_LONG) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(PY_LONG_LONG) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(PY_LONG_LONG) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(PY_LONG_LONG) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(PY_LONG_LONG) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(PY_LONG_LONG) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(PY_LONG_LONG),
+                                     little, !is_unsigned);
+    }
+}
+
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_PY_LONG_LONG(unsigned PY_LONG_LONG value) {
+    const unsigned PY_LONG_LONG neg_one = (unsigned PY_LONG_LONG) ((unsigned PY_LONG_LONG) 0 - (unsigned PY_LONG_LONG) 1), const_zero = (unsigned PY_LONG_LONG) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(unsigned PY_LONG_LONG) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(unsigned PY_LONG_LONG) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(unsigned PY_LONG_LONG) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(unsigned PY_LONG_LONG) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(unsigned PY_LONG_LONG) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(unsigned PY_LONG_LONG),
+                                     little, !is_unsigned);
+    }
+}
+
+/* CIntToPy */
   static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
@@ -26524,37 +26970,6 @@ static CYTHON_INLINE int __pyx_memview_set_unsigned_char(const char *itemp, PyOb
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
         return _PyLong_FromByteArray(bytes, sizeof(long),
-                                     little, !is_unsigned);
-    }
-}
-
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_long(unsigned long value) {
-    const unsigned long neg_one = (unsigned long) ((unsigned long) 0 - (unsigned long) 1), const_zero = (unsigned long) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(unsigned long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(unsigned long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(unsigned long) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(unsigned long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(unsigned long) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(unsigned long),
                                      little, !is_unsigned);
     }
 }

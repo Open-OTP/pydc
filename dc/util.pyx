@@ -1,7 +1,12 @@
 # cython: language_level=3
+# cython: boundscheck=False
+# cython: wraparound=False
 from libc.stdlib cimport realloc, malloc, free
 from libc.string cimport memcpy
 import numpy as np
+
+
+cdef unsigned short CONTROL_MESSAGE = 4001
 
 
 cdef class Datagram:
@@ -109,6 +114,22 @@ cdef class Datagram:
         if self.buffer is NULL:
             raise MemoryError('could not allocate memory for datagram')
 
+    def add_server_header(self, list targets, long long sender, unsigned short msg_id):
+        cdef unsigned char num_targets = len(targets)
+        cdef unsigned long long n
+        self.append_data(&num_targets, sizeof(num_targets))
+        for n in targets:
+            self.append_data(&n, sizeof(unsigned long long))
+        self.append_data(&sender,  sizeof(unsigned long long))
+        self.append_data(&msg_id, sizeof(msg_id))
+
+    def add_server_control_header(self, unsigned short msg_id):
+        cdef unsigned char num_targets = 1
+        cdef unsigned long long channel = CONTROL_MESSAGE
+        self.append_data(&num_targets, sizeof(num_targets))
+        self.append_data(&channel, sizeof(channel))
+        self.append_data(&msg_id, sizeof(msg_id))
+
     def add_datagram(self, Datagram dg):
         self.append_data(&dg.buffer[0], dg.length)
 
@@ -210,14 +231,14 @@ cdef class DatagramIterator:
     def get_int64(self):
         if self.offset + sizeof(long long) > self.dg.length:
             raise OverflowError('tried reading past datagram')
-        cdef long value
+        cdef long long value
         self.get_data(&value, sizeof(value))
         return value
 
     def get_uint64(self):
         if self.offset + sizeof(unsigned long long) > self.dg.length:
             raise OverflowError('tried reading past datagram')
-        cdef unsigned long value
+        cdef unsigned long long value
         self.get_data(&value, sizeof(value))
         return value
 
@@ -278,6 +299,13 @@ cdef class DatagramIterator:
             return 0
 
         return remaining
+
+    def get_remaining(self):
+        cdef int remaining = self.dg.length - self.offset
+        if remaining <= 0:
+            return b''
+
+        return self.dg.buffer[self.offset:self.dg.length]
 
     def tell(self):
         return self.offset
