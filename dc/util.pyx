@@ -276,6 +276,16 @@ cdef class DatagramIterator:
 
         return value.decode('utf-8')
 
+    def get_blob16(self):
+        cdef unsigned short num_bytes = self.get_uint16()
+
+        if self.offset + num_bytes > self.dg.length:
+            raise OverflowError('tried reading past datagram')
+
+        cdef bytearray value = bytearray(num_bytes)
+        self.get_data(<unsigned char *>value, num_bytes)
+        return bytes(value)
+
     def get_string32(self):
         cdef unsigned int num_bytes = self.get_uint32()
         if self.offset + num_bytes > self.dg.length:
