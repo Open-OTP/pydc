@@ -814,6 +814,12 @@ class DClass:
         self.is_struct = is_struct  # type: bool
         self.constructor = None
 
+    def __getitem__(self, item):
+        if type(item) == int:
+            return self.inherited_fields[item]
+        else:
+            return self.fields_by_name[item]
+
     def add_field(self, field):
         field.dclass = ref(self)
 
