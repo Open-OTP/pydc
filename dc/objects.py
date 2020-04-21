@@ -773,7 +773,16 @@ class MolecularField(DCField):
 
     def __init__(self, name, subfields, keywords=()):
         DCField.__init__(self, name, keywords)
-        self.subfields = subfields # type: List[DCField]
+        self.subfields = subfields  # type: List[DCField]
+
+    def resolve_keywords(self):
+        keywords = set(self.keywords)
+        for subfield in self.subfields:
+            for kw in subfield.keywords:
+                if kw not in keywords:
+                    keywords.add(kw)
+
+        self.keywords = tuple(keywords)
 
     def generate_hash(self, hash_gen):
         DCField.generate_hash(self, hash_gen)
@@ -824,7 +833,8 @@ class DClass:
         field.dclass = ref(self)
 
         if isinstance(field, MolecularField):
-            field.subfields = [proxy(self.fields_by_name[name]) for name in field.subfields]
+            field.subfields = [proxy(self[name]) for name in field.subfields]
+            field.resolve_keywords()
 
         if field.name:
             if field.name == self.name:
