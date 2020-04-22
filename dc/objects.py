@@ -348,8 +348,12 @@ class ArrayParameter(SimpleParameter):
             for i in it:
                 SimpleParameter.pack_value(self, dg, i)
         else:
-            for i in it:
-                self.dtype.pack_value(dg, i)
+            if hasattr(self.dtype, 'is_struct') and self.dtype.is_struct:
+                for i in it:
+                    self.dtype.pack_from_iterable(dg, i)
+            else:
+                for i in it:
+                    self.dtype.pack_value(dg, i)
 
         if need_length_header:
             data_size = dg.tell() - pre_pos
@@ -411,8 +415,9 @@ class ArrayParameter(SimpleParameter):
                     element = SimpleParameter.unpack_value(self, dgi)
                     length -= self.fixed_byte_size
                 else:
-                    element = self.dtype.unpack_value(self, dgi)
-                    length -= self.dtype.fixed_byte_size
+                    p = dgi.tell()
+                    element = self.dtype.unpack_value(dgi)
+                    length -= dgi.tell() - p
 
                 elements.append(element)
 
