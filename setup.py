@@ -10,7 +10,7 @@ util_ext = Extension(
 )
 
 setup(name='dc',
-      version='0.3',
+      version='0.3.1',
       description='Portable parser for Disney\'s Distributed Class protocol',
       author='alexanderr',
       url='https://www.github.com/alexanderr/pydc',

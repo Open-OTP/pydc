@@ -1082,5 +1082,9 @@ class DClass:
         for field in self.fields:
             self.pack_field(dg, obj, field)
 
+    def pack_from_iterable(self, dg, it):
+        for field, value in zip(self.fields, it):
+            field.pack_value(dg, value)
+
     def unpack_value(self, dgi):
         return [field.unpack_value(dgi) for field in self.fields]
