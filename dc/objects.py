@@ -629,8 +629,7 @@ class TypeDef(object):
 
 
 class DCField(DCPackable):
-    __slots__ = 'name', 'keywords', 'number', 'dclass', 'flags', 'is_required', 'is_broadcast', 'is_ownrecv', \
-                'is_ram', 'is_airecv'
+    __slots__ = 'name', 'keywords', 'number', 'dclass', 'flags'
 
     def __init__(self, name, keywords=()):
         self.name = name
@@ -638,11 +637,42 @@ class DCField(DCPackable):
         self.number = -1
         self.dclass = None
         self.flags = self.calc_flags()
-        self.is_required = 'required' in keywords
-        self.is_broadcast = 'broadcast' in keywords
-        self.is_ownrecv = 'ownrecv' in keywords
-        self.is_ram = 'ram' in keywords
-        self.is_airecv = 'airecv' in keywords
+
+    @property
+    def is_broadcast(self):
+        return self.flags & HistoricKeywords.broadcast
+
+    @property
+    def is_ram(self):
+        return self.flags & HistoricKeywords.ram
+
+    @property
+    def is_required(self):
+        return self.flags & HistoricKeywords.required
+
+    @property
+    def is_db(self):
+        return self.flags & HistoricKeywords.db
+
+    @property
+    def is_ownsend(self):
+        return self.flags & HistoricKeywords.ownsend
+
+    @property
+    def is_clsend(self):
+        return self.flags & HistoricKeywords.clsend
+
+    @property
+    def is_airecv(self):
+        return self.flags & HistoricKeywords.airecv
+
+    @property
+    def is_ownrecv(self):
+        return self.flags & HistoricKeywords.ownrecv
+
+    @property
+    def is_clrecv(self):
+        return self.flags & HistoricKeywords.clrecv
 
     def generate_hash(self, hash_gen):
         hash_gen.add_string(self.name)
@@ -788,6 +818,7 @@ class MolecularField(DCField):
                     keywords.add(kw)
 
         self.keywords = tuple(keywords)
+        self.flags = self.calc_flags()
 
     def generate_hash(self, hash_gen):
         DCField.generate_hash(self, hash_gen)
