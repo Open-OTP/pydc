@@ -244,6 +244,13 @@ class IntParameter(SimpleParameter):
         else:
             return not abs(v) >> int(self.dtype[3:]) - 1
 
+    def pack_value(self, dg, value):
+        if type(value) == float:
+            value = int(value * self.divisor)
+            SimpleParameter.pack_value(self, dg, value)
+        else:
+            SimpleParameter.pack_value(self, dg, value)
+
 
 class FloatParameter(SimpleParameter):
     def generate_hash(self, hash_gen):
@@ -451,7 +458,6 @@ class SizedParameter(SimpleParameter):
               dg.add_string16(value)
           else:
               dg.add_string32(value)
-
 
     def unpack_value(self, dgi):
         if not self.fixed_byte_size:
