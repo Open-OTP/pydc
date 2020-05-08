@@ -1,4 +1,4 @@
-dc_file: type_decl ( type_decl )*
+LEXER = r'''dc_file: type_decl ( type_decl )*
 
 type_decl: keyword_type | typedef_type | struct_type | class_type | import_decl
 
@@ -167,3 +167,4 @@ COMMENT: /\/\/[^\n]*/
 %ignore WHITESPACE
 WHITESPACE: WHITESPACE_INLINE | /[\r\n]/+
 WHITESPACE_INLINE: /[ \t]/+
+'''

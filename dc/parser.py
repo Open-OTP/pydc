@@ -509,17 +509,17 @@ class DCFile:
 
 
 import os
-DC_LARK = os.path.join(os.path.dirname(__file__), 'dc.lark')
+
+from .lexer import LEXER
 
 
 def parse_dc_file(fp: str, debug=False) -> DCFile:
-    with open(DC_LARK, 'r') as lark_f:
-        transformer = DCFileTransformer()
-        dc_parser = Lark(lark_f, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
-        with open(fp, 'r') as f2:
-            tree = dc_parser.parse(f2.read(),)
+    transformer = DCFileTransformer()
+    dc_parser = Lark(LEXER, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
+    with open(fp, 'r') as f2:
+        tree = dc_parser.parse(f2.read(),)
 
-        return transformer.dcfile
+    return transformer.dcfile
 
 
 def parse_dc_files(fps, debug=False) -> DCFile:
@@ -530,19 +530,17 @@ def parse_dc_files(fps, debug=False) -> DCFile:
             data = ''.join((data, f.read()))
             f.close()
 
-    with open(DC_LARK, 'r') as lark_f:
-        transformer = DCFileTransformer()
-        dc_parser = Lark(lark_f, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
-        dc_parser.parse(data,)
+    transformer = DCFileTransformer()
+    dc_parser = Lark(LEXER, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
+    dc_parser.parse(data,)
 
     return transformer.dcfile
 
 
 def parse_dc(data: str, debug=False) -> DCFile:
-    with open(DC_LARK, 'r') as lark_f:
-        transformer = DCFileTransformer()
-        dc_parser = Lark(lark_f, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
-        dc_parser.parse(data,)
+    transformer = DCFileTransformer()
+    dc_parser = Lark(LEXER, start='dc_file', debug=debug, parser='lalr', lexer='contextual', transformer=transformer)
+    dc_parser.parse(data,)
 
     return transformer.dcfile
 
