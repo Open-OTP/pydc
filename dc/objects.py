@@ -1130,3 +1130,6 @@ class DClass:
 
     def unpack_value(self, dgi):
         return [field.unpack_value(dgi) for field in self.fields]
+
+    def unpack_bytes(self, dgi):
+        return b''.join([field.unpack_bytes(dgi) for field in self.fields])
