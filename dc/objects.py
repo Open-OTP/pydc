@@ -461,10 +461,12 @@ class SizedParameter(SimpleParameter):
 
     def unpack_value(self, dgi):
         if not self.fixed_byte_size:
-            if self.dtype != 'blob32':
-                return dgi.get_string16()
+            if self.dtype == 'blob32':
+                return dgi.get_blob32()
+            elif self.dtype == 'blob':
+                return dgi.get_blob16()
             else:
-                return dgi.get_string32()
+                return dgi.get_string16()
         else:
             return dgi.get_bytes(self.fixed_byte_size)
 
