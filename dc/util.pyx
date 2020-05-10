@@ -137,12 +137,16 @@ cdef class Datagram:
     def add_datagram(self, Datagram dg):
         self.append_data(&dg.buffer[0], dg.length)
 
-    def get_message(self):
+    def array(self):
         cdef unsigned char[::1] memview = <unsigned char[:self.length:1]>self.buffer
         output = np.asarray(memview)
         return output
 
-    def get_length(self):
+    def bytes(self):
+        cdef unsigned char[::1] memview = <unsigned char[:self.length:1]>self.buffer
+        return bytes(memview)
+
+    def __len__(self):
         return self.length
 
     def __dealloc__(self):
@@ -314,7 +318,7 @@ cdef class DatagramIterator:
 
         return remaining
 
-    def get_remaining(self):
+    def remaining_bytes(self):
         cdef int remaining = self.dg.length - self.offset
         if remaining <= 0:
             return b''
