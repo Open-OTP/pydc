@@ -15,6 +15,10 @@ cdef class Datagram:
     cdef unsigned int offset
     cdef unsigned int buffer_size
 
+    def __init__(self, const unsigned char[:] initial_data=b''):
+        if initial_data.size:
+            self.append_data(&initial_data[0], initial_data.size)
+
     def __cinit__(self):
         self.length = 0
         self.offset = 0
