@@ -1,6 +1,29 @@
 import unittest
 
-from dc.parser import parse_dc_file, parse_dc_files
+from dc.parser import parse_dc_file, parse_dc_files, parse_dc
+from dc.util import Datagram
+
+SWITCH_TEST = '''
+struct BuffData {
+  switch (uint16) {
+  case 0:
+    break;
+  case 1:
+    uint8 val1;
+    break;
+  case 2:
+    uint8 val1;
+    uint8 val2;
+    break;
+  case 3:
+    uint8 val1;
+    break;
+  case 4:
+    int16/100 val1;
+    break;
+  };
+};
+'''
 
 
 class TestDCFile(unittest.TestCase):
@@ -11,15 +34,16 @@ class TestDCFile(unittest.TestCase):
         self.assertEqual(dc.fields[150]().name, 'removeAvatarResponse')
         self.assertEqual(dc.classes[23].name, 'DistributedPlayer')
 
-        dc = parse_dc_files(('otp.dc', 'toon.dc'))
-        self.assertEqual(dc.hash, 1428073344)
+    def test_switch(self):
+        dc = parse_dc(SWITCH_TEST)
 
-        toon = dc.classes[62]
+        self.assertEqual(dc.hash, 56286)
 
-        self.assertEqual(toon.name, 'DistributedToon')
-        self.assertEqual(len(dc.classes), 394)
-        self.assertEqual(len(toon.fields), 178)
-        self.assertEqual(toon.inherited_fields[150].name, 'setDisguisePageFlag')
+        switch = dc.fields[0]().parameter
+        self.assertEqual(len(switch.cases), 5)
+        self.assertEqual(switch.default_case, None)
+        self.assertEqual(switch.cases[4].value, 4)
+        self.assertEqual(switch.cases[0].breaked, True)
 
 
 if __name__ == '__main__':
