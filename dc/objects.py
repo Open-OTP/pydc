@@ -550,7 +550,14 @@ class DSwitch(Parameter):
 
         hash_gen.add_int(len(self.cases))
         for case in self.cases:
-            hash_gen.add_string(self.parameter.pack_value(case.value))
+            try:
+                dg = Datagram()
+                pack_functions[DCTypes[self.dtype]](dg, case.value)
+            except KeyError:
+                dg = Datagram()
+                self.dtype.pack_value(dg, case.value)
+
+            hash_gen.add_bytes(dg.bytes())
 
             hash_gen.add_int(len(case.parameters) + 1)
             self.dtype.generate_hash(hash_gen)

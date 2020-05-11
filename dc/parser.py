@@ -231,8 +231,6 @@ class DCFileTransformer(Transformer):
         return Tree('switch_body', cases)
 
     def switch_case(self, args):
-        args[0] = args[0].value
-        args[1] = self.NUM_LITERAL(args[1].value)
         return Tree('switch_case', args)
 
     def default_case(self, args):
@@ -381,6 +379,8 @@ class DCFileTransformer(Transformer):
         return Tree(name, [modulus, divisor])
 
     def INT_LITERAL(self, args):
+        if isinstance(args, list):
+            args = args[0]
         if args.startswith('-'):
             args.value = int(args)
             return args
@@ -393,12 +393,8 @@ class DCFileTransformer(Transformer):
         return args
 
     def num_literal(self, args):
-        if '.' in args:
-            self.FLOAT_LITERAL(args)
-        else:
-            self.INT_LITERAL(args)
-
-        return args.value
+        token = args[0]
+        return token.value
 
     def DECIMALS(self, args):
         return ''.join([token.value for token in args])
