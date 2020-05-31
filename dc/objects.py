@@ -802,11 +802,14 @@ class AtomicField(DCField):
             hash_gen.add_int(self.flags)
 
     def pack_value(self, dg, args):
-        if len(args) != len(self.parameters):
-            raise DCParseError('Expected %s for packing, received %s.' % (len(self.parameters), len(args)))
-
-        for parameter, arg in zip(self.parameters, args):
-            parameter.pack_value(dg, arg)
+        # Allow generator usage for getters while also ensuring we pack all required parameters.
+        it = zip(self.parameters, args)
+        try:
+            for _ in range(len(self.parameters)):
+                parameter, arg = next(it)
+                parameter.pack_value(dg, arg)
+        except StopIteration:
+            raise DCParseError(f'Missing parameters for field: {self.name}. args={list(args)}')
 
     def unpack_value(self, dgi):
         return tuple(parameter.unpack_value(dgi) for parameter in self.parameters)
@@ -1078,8 +1081,6 @@ class DClass:
 
                     if len(field.parameters) == 1:
                         val = (val, )
-                    else:
-                        assert isinstance(val, collections.abc.Sequence)
                     field.pack_value(dg, val)
                     return
 
@@ -1090,8 +1091,7 @@ class DClass:
                 else:
                     raise AttributeError
             except AttributeError as e:
-                assert field.parameter.default is not None
-                field.pack_default(dg)
+                raise DCParseError(f'Could not find field: {field}, for object {obj}')
 
     def ai_database_generate_context(self, context_id, parent_id, zone_id, owner_channel, database_server_id, from_channel_id):
         dg = Datagram()
