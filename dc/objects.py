@@ -216,7 +216,7 @@ class SimpleParameter(Parameter):
 
     def pack_value(self, dg, value):
         if not self.validate_value(value):
-            raise DCParseError
+            raise DCParseError(f'value `{value}` not in range for type `{self.dtype}`')
         # TODO: remove this hacky sack
         if self.dtype == 'uint32uint8array':
             return struct.pack('<IB', *value)
@@ -250,6 +250,11 @@ class IntParameter(SimpleParameter):
             SimpleParameter.pack_value(self, dg, value)
         else:
             SimpleParameter.pack_value(self, dg, value)
+
+    def unpack_value(self, dgi):
+        value = unpack_functions[DCTypes[self.dtype]](dgi)
+        value //= self.divisor
+        return value
 
 
 class FloatParameter(SimpleParameter):
