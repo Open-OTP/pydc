@@ -239,10 +239,13 @@ class IntParameter(SimpleParameter):
         if v is None:
             return True
 
+        bit_size = self.fixed_byte_size * 8
         if self.dtype[0] == 'u':
-            return v >= 0 and not v >> int(self.dtype[4:])
+            # Unsigned integer
+            return 0 <= v < (1 << bit_size)
         else:
-            return not abs(v) >> int(self.dtype[3:]) - 1
+            bit_size -= 1
+            return -(1 << bit_size) <= v < (1 << bit_size)
 
     def pack_value(self, dg, value):
         value = int(value * self.divisor)
